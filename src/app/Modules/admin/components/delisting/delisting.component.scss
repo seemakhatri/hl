@@ -68,3 +68,15 @@
     border: 2px solid #03a426; 
   }
   
+
+  @media (max-width: 768px) {
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .company-card {
+      flex-direction: column;
+      width: 100%;
+    }
+  }

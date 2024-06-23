@@ -13,7 +13,7 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: center; 
+      align-items: center;
       background-color: rgb(34, 41, 45);
       color: #acacac;
       border: 1px solid rgb(73, 73, 73);
@@ -22,33 +22,33 @@
       margin-bottom: 20px;
       cursor: pointer;
       transition: transform 0.3s ease;
-  
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      &.highlighted {
-        border-color: #89d69b; 
-      }
-  
-      h3 {
-        color: #007bff;
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-      }
-  
-      p {
-        color: #b7b7b7;
-        margin-bottom: 8px;
-      }
-  
-      strong {
-        color: #a8a8a8;
-        margin-right: 5px;
-      }
     }
-  }
+    
+    .company-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .company-card.highlighted {
+      border-color: #89d69b;
+    }
+    
+    .company-card h3 {
+      color: #007bff;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+    
+    .company-card p {
+      color: #b7b7b7;
+      margin-bottom: 8px;
+    }
+    
+    .company-card strong {
+      color: #a8a8a8;
+      margin-right: 5px;
+    }
+    
 
   
   .dark-mode .container {
@@ -68,3 +68,17 @@
     border: 2px solid #03a426; 
   }
   
+
+  @media (max-width: 768px) {
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .company-card {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+}
