@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { ThemeService } from 'src/app/services/theme.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,8 @@ import { Location } from '@angular/common';
 export class HeaderComponent {
   isMenuOpen = false;
 
-  constructor(private themeService: ThemeService, private router: Router, private location: Location) {
+
+  constructor(private themeService: ThemeService, private router: Router) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -20,7 +21,6 @@ export class HeaderComponent {
       });
   }
 
-  ngOnInit() { }
 
   toggleDarkMode() {
     this.themeService.toggleDarkMode();
@@ -39,8 +39,8 @@ export class HeaderComponent {
   }
 
   navigateHome() {
-    this.router.navigate(['/admin/home']).then(() => {
-      location.reload();
+    this.router.navigate(['/home']).then(() => {
+      window.location.reload();
     });
   }
 }
