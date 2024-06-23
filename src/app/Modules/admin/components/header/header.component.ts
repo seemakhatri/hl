@@ -40,7 +40,10 @@ export class HeaderComponent {
 
   navigateHome() {
     this.router.navigate(['/admin/home']).then(() => {
-      window.location.reload();
+      location.reload();
+    }).catch(error => {
+      console.error('Navigation error:', error);
     });
   }
+  
 }
