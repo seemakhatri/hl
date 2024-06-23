@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <div class="header" [ngClass]="{'dark-mode': isDarkMode}">
-    <div class="left" (click)="navigateHome()">
-      <h2>HL</h2>
+    <div class="left">
+      <h2 routerLink="/home">HL</h2>
     </div>
 
     <div class="center" [ngClass]="{'open': isMenuOpen}">

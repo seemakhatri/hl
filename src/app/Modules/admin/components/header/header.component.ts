@@ -38,12 +38,4 @@ export class HeaderComponent {
     this.isMenuOpen = false;
   }
 
-  navigateHome() {
-    this.router.navigate(['/admin/home']).then(() => {
-      location.reload();
-    }).catch(error => {
-      console.error('Navigation error:', error);
-    });
-  }
-  
 }
