@@ -19,8 +19,8 @@ export class StockSplitComponent {
   companies: Company[] = [
     { id: '1', name: 'Company A', descriptionDate: new Date('2024-04-10') , recordDate: new Date('2024-05-10'), effectiveDate: new Date('2024-05-30') },
     { id: '2', name: 'Company B', descriptionDate: new Date('2024-05-15') , recordDate: new Date('2024-05-15'), effectiveDate: new Date('2024-06-05') },
-    { id: '3', name: 'Company C', descriptionDate: new Date('2024-06-01') , recordDate: new Date('2024-06-01'), effectiveDate: new Date('2024-06-20') },
-    { id: '4', name: 'Company D', descriptionDate: new Date('2024-07-10') , recordDate: new Date('2024-06-10'), effectiveDate: new Date('2024-06-30') },
+    { id: '3', name: 'Company C', descriptionDate: new Date('2024-06-01') , recordDate: new Date('2024-06-01'), effectiveDate: new Date('2024-06-30') },
+    { id: '4', name: 'Company D', descriptionDate: new Date('2024-07-10') , recordDate: new Date('2024-06-10'), effectiveDate: new Date('2024-07-30') },
     { id: '5', name: 'Company E', descriptionDate: new Date('2024-08-25') , recordDate: new Date('2024-04-25'), effectiveDate: new Date('2024-05-15') }
   ];
 

@@ -18,12 +18,12 @@ interface Company {
 export class DividendComponent {
   companies: Company[] = [
     { id: '1', name: 'Company A', descriptionDate: new Date('2024-04-05'), exDividendDate: new Date('2024-03-20'), paymentDate: new Date('2024-04-5') },
-    { id: '2', name: 'Company B',  descriptionDate: new Date('2024-06-30'), exDividendDate: new Date('2024-04-20'), paymentDate: new Date('2024-05-10')   },
-    { id: '3', name: 'Company C', descriptionDate: new Date('2024-05-10'),  exDividendDate: new Date('2024-06-01'), paymentDate: new Date('2024-07-05')  },
+    { id: '2', name: 'Company B',     descriptionDate: new Date('2024-05-10'),  exDividendDate: new Date('2024-04-20'), paymentDate: new Date('2024-05-10')    },
+    { id: '3', name: 'Company C', descriptionDate: new Date('2024-06-30'),  exDividendDate: new Date('2024-06-01'), paymentDate: new Date('2024-07-05') },
     { id: '4', name: 'Company D', descriptionDate: new Date('2024-09-30'), exDividendDate: new Date('2024-09-01'), paymentDate: new Date('2024-05-30') },
     { id: '5', name: 'Company E', descriptionDate: new Date('2024-10-01'), exDividendDate: new Date('2024-10-01'), paymentDate: new Date('2024-10-20') }
   ];
- 
+
  
 
 
