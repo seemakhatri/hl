@@ -1,36 +1,24 @@
 <div class="container mt-3">
-    <div class="header" [ngClass]="{'dark-mode': isDarkMode}">
-      <div class="left" (click)="navigateHome()">
-        <h2>HL</h2>
-      </div>
-  
-      <div class="center" [ngClass]="{'open': isMenuOpen}">
-        <a routerLink="/home" class="nav-item" (click)="closeMenu()">Home</a>
-        <a routerLink="/admin/about" class="nav-item" (click)="closeMenu()">About</a>
-        <a routerLink="/admin/dividend" class="nav-item" (click)="closeMenu()">Dividend</a>
-        <a routerLink="/admin/stock-split" class="nav-item" (click)="closeMenu()">Stock Split/Rights Issue</a>
-        <a routerLink="/admin/consolidation" class="nav-item" (click)="closeMenu()">Consolidation</a>
-        <a routerLink="/admin/delisting" class="nav-item" (click)="closeMenu()">Delisting</a>
-     
-      </div>
-  
-   <div class="right">
-    
-  <button (click)="toggleDarkMode()" class="dark-mode-toggle">
-    <span *ngIf="isDarkMode">🌙</span>
-    <span *ngIf="!isDarkMode">☀️</span>
-  </button>
+  <div class="header" [ngClass]="{'dark-mode': isDarkMode}">
+    <div class="left" (click)="navigateHome()">
+      <h2>HL</h2>
+    </div>
 
-  <button (click)="toggleMenu()" class="menu-toggle">☰</button>
-</div>
+    <div class="center" [ngClass]="{'open': isMenuOpen}">
+      <a routerLink="/home" class="nav-item" (click)="closeMenu()">Home</a>
+      <a routerLink="/admin/about" class="nav-item" (click)="closeMenu()">About</a>
+      <a routerLink="/admin/dividend" class="nav-item" (click)="closeMenu()">Dividend</a>
+      <a routerLink="/admin/stock-split" class="nav-item" (click)="closeMenu()">Stock Split/Rights Issue</a>
+      <a routerLink="/admin/consolidation" class="nav-item" (click)="closeMenu()">Consolidation</a>
+      <a routerLink="/admin/delisting" class="nav-item" (click)="closeMenu()">Delisting</a>
+    </div>
 
-
-      
+    <div class="right">
+      <button (click)="toggleDarkMode()" class="dark-mode-toggle">
+        <span *ngIf="isDarkMode">🌙</span>
+        <span *ngIf="!isDarkMode">☀️</span>
+      </button>
+      <button (click)="toggleMenu()" class="menu-toggle">☰</button>
     </div>
   </div>
-
-
-
-  
-
-  
+</div>

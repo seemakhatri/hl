@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ThemeService } from 'src/app/services/theme.service';
@@ -20,10 +19,7 @@ export class HeaderComponent {
       });
   }
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() { }
 
   toggleDarkMode() {
     this.themeService.toggleDarkMode();
@@ -42,10 +38,6 @@ export class HeaderComponent {
   }
 
   navigateHome() {
-    this.router.navigate(['/home']).then(() => {
-      window.location.reload();
-    });
+    window.location.href = '/home';
   }
-
-
 }
