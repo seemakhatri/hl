@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { ThemeService } from 'src/app/services/theme.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { ThemeService } from 'src/app/services/theme.service';
 export class HeaderComponent {
   isMenuOpen = false;
 
-  constructor(private themeService: ThemeService, private router: Router) {
+  constructor(private themeService: ThemeService, private router: Router, private location: Location) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -38,6 +39,8 @@ export class HeaderComponent {
   }
 
   navigateHome() {
-    window.location.href = '/home';
+    this.router.navigate(['/admin/home']).then(() => {
+      location.reload();
+    });
   }
 }
