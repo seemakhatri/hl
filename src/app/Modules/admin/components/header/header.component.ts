@@ -39,7 +39,7 @@ export class HeaderComponent {
   }
 
   navigateHome() {
-    this.router.navigate(['/home']).then(() => {
+    this.router.navigate(['/admin/home']).then(() => {
       window.location.reload();
     });
   }
