@@ -1,0 +1,57 @@
+<div class="container" [ngClass]="{'dark-mode': isDarkMode}">
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="order-tracking-line">
+          <div class="dot dot-left"></div>
+          <div class="moving-dash"></div>
+          <div class="moving-dot" [ngStyle]="{'left.%': isPrevious ? 100 : (isNext ? 0 : markerPosition)}"></div>
+          <div class="remaining-days-label" [ngStyle]="{'left.%': isPrevious ? 100 : (isNext ? 0 : markerPosition)}">
+            <span *ngIf="isPrevious">Completed</span>
+            <span *ngIf="isNext">Upcoming</span>
+            <span *ngIf="!isPrevious && !isNext && !isCompleted && !isUpcoming">
+              {{ currentDate | date: 'dd MMMM yyyy' }} <br>
+              Days: {{ getRemainingDaysArray().length }}
+            </span>
+            <span *ngIf="!isPrevious && !isNext && isCompleted">Completed</span>
+            <span *ngIf="!isPrevious && !isNext && isUpcoming">Upcoming</span>
+          </div>
+          
+          <div class="dot dot-right"></div>
+          <div class="dot-label dot-label-left">
+            <span *ngIf="!isPrevious && !isNext">Ex-dividend <br>{{ companyDetails?.exDividendDate | date: 'dd MMMM yyyy' }}</span>
+            <span *ngIf="isPrevious && !isNext">Ex-dividend <br>{{ previousExDividendDate | date: 'dd MMMM yyyy' }} </span>
+            <span *ngIf="!isPrevious && isNext">Ex-dividend <br> {{nextExDividendDate| date: 'dd MMMM yyyy'}}</span>
+          </div>
+          <div class="dot-label dot-label-right">
+            <span *ngIf="!isPrevious && !isNext">Payment Date: <br>{{ companyDetails?.paymentDate | date: 'dd MMMM yyyy' }}</span>
+            <span *ngIf="isPrevious && !isNext">Payment Date: <br>{{ previousPaymentDate | date: 'dd MMMM yyyy' }} </span>
+            <span *ngIf="!isPrevious && isNext">Payment Date: <br> {{ nextPaymentDate | date: 'dd MMMM yyyy' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="company-details">
+      <div class="filter-menu">
+        <button (click)="loadPreviousCompany()">Previous</button>
+        <button (click)="loadNextCompany()">Next</button>
+      </div>
+      <br>
+      <h2>{{ companyDetails?.name }}</h2>
+      <br>
+      <h5>Key Dates:</h5>
+      <h6 *ngIf="!isPrevious && !isNext">• Ex-Dividend Date: {{ companyDetails?.exDividendDate | date: 'dd MMMM yyyy' }}</h6>
+      <h6 *ngIf="!isPrevious && !isNext">• Payment Date: {{ companyDetails?.paymentDate | date: 'dd MMMM yyyy' }}</h6>
+      <h6 *ngIf="isPrevious">• Previous Ex-Dividend Date: {{ previousExDividendDate | date: 'dd MMMM yyyy' }}</h6>
+      <h6 *ngIf="isPrevious">• Previous Payment Date: {{ previousPaymentDate | date: 'dd MMMM yyyy' }}</h6>
+      <h6 *ngIf="isNext">• Next Ex-Dividend Date: {{ nextExDividendDate | date: 'dd MMMM yyyy' }}</h6>
+      <h6 *ngIf="isNext">• Next Payment Date: {{ nextPaymentDate | date: 'dd MMMM yyyy' }}</h6>
+      <br>
+      <div *ngIf="!isNext">
+        <p>Shareholders who are on the register as of the ex-dividend date will be eligible to receive the dividend payment on the payment date.</p>
+        <p>This dividend reflects our commitment to returning value to our shareholders and our confidence in the company’s continued growth and profitability. We thank you for your ongoing support and investment in {{ companyDetails?.name }}</p>
+        <p>If you have any questions regarding the dividend payment, please do not hesitate to contact our investor relations team at [Investor Relations Contact Information].</p>
+        <a href="https://wa.me/918690489919" target="_blank" class="chat-button">Chat Now</a>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,58 @@
+<div class="container" [ngClass]="{'dark-mode': isDarkMode}">
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="order-tracking-line">
+          <div class="dot dot-left"></div>
+          <div class="moving-dash"></div>
+          <div class="moving-dot" [ngStyle]="{'left.%': isPrevious ? 100 : (isNext ? 0 : markerPosition)}"></div>
+          <div class="remaining-days-label" [ngStyle]="{'left.%': isPrevious ? 100 : (isNext ? 0 : markerPosition)}">
+            <span *ngIf="isPrevious">Completed</span>
+            <span *ngIf="isNext">Upcoming</span>
+            <span *ngIf="!isPrevious && !isNext && !isCompleted && !isUpcoming">
+              {{ currentDate | date: 'dd MMMM yyyy' }} <br>
+              Days: {{ getRemainingDaysArray().length }}
+            </span>
+            <span *ngIf="!isPrevious && !isNext && isCompleted">Completed</span>
+            <span *ngIf="!isPrevious && !isNext && isUpcoming">Upcoming</span>
+          </div>
+          
+          <div class="dot dot-right"></div>
+          <div class="dot-label dot-label-left">
+            <span *ngIf="!isPrevious && !isNext">Record Date: <br>{{ companyDetails?.recordDate | date: 'dd MMMM yyyy' }}</span>
+            <span *ngIf="isPrevious && !isNext">Record Date: <br>{{ previousRecordDate | date: 'dd MMMM yyyy' }} </span>
+            <span *ngIf="!isPrevious && isNext">Record Date:<br> {{nextRecordDate| date: 'dd MMMM yyyy'}}</span>
+          </div>
+          <div class="dot-label dot-label-right">
+            <span *ngIf="!isPrevious && !isNext">Effective Date: <br>{{ companyDetails?.effectiveDate | date: 'dd MMMM yyyy' }}</span>
+            <span *ngIf="isPrevious && !isNext">Effective Date: <br>{{ previousEffectiveDate | date: 'dd MMMM yyyy' }} </span>
+            <span *ngIf="!isPrevious && isNext">Effective Date: <br> {{ nextEffectiveDate | date: 'dd MMMM yyyy' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="company-details">
+      <div class="filter-menu">
+        <button (click)="loadPreviousCompany()">Previous</button>
+        <button (click)="loadNextCompany()">Next</button>
+      </div>
+      <br>
+      <h2>{{ companyDetails?.name }}</h2>
+      <br>
+      <h5>Key Dates:</h5>
+      <h6>   Stock Split Ratio: For every 100 shares held, shareholders will receive an additional 300 shares, resulting in a total of 400 shares.</h6>
+      <h6 *ngIf="!isPrevious && !isNext">• Record Date: {{ companyDetails?.recordDate | date: 'dd MMMM yyyy' }}</h6>
+      <h6 *ngIf="!isPrevious && !isNext">•  Effective Date: {{ companyDetails?.effectiveDate | date: 'dd MMMM yyyy' }}</h6>
+      <h6 *ngIf="isPrevious">• Previous Record Date: {{ previousRecordDate }}</h6>
+      <h6 *ngIf="isPrevious">• Previous Effective Date: {{ previousEffectiveDate }}</h6>
+      <h6 *ngIf="isNext">• Next Record Date: {{ nextRecordDate }}</h6>
+      <h6 *ngIf="isNext">• Next Effective Date: {{ nextEffectiveDate }}</h6>
+      <br>
+      <div *ngIf="!isNext">
+        <p>Shareholders who are on the register as of the record date will be entitled to the additional shares. The new shares will be distributed on the effective date.</p>
+        <p>This stock split reflects our commitment to enhancing shareholder value and improving the liquidity of our shares. The split will reduce the market price per share proportionally, making our stock more accessible to a broader range of investors.
+        </p>     
+        <a href="https://wa.me/918690489919" target="_blank" class="chat-button">Chat Now</a>
+      </div>
+    </div>
+  </div>
+  

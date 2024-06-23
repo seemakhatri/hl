@@ -1,0 +1,13 @@
+<div class="container" [ngClass]="{'dark-mode': isDarkMode}">
+    <h2>Dividend Information</h2>
+    <div *ngFor="let company of companies" class="company-card"
+    (click)="viewDetails(company)"
+    [ngClass]="{'highlighted': isInCurrentMonth(company.descriptionDate)}">
+      <h3>{{ company.name }}</h3>
+      <p>{{ company.descriptionDate | date: 'dd MMMM yyyy' }}</p>
+    </div>
+
+
+
+  </div>
+  

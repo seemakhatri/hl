@@ -1,0 +1,67 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+  
+  app-header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 70px;
+    z-index: 10000;
+  }
+  
+  router-outlet {
+    padding-bottom: 10px;
+    overflow-y: auto;
+  }
+  
+  app-footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  
+  #custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #999999;
+    background-color: #838383;
+    border-radius: 50%;
+    position: absolute;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s ease, height 0.1s ease, background-color 0.1s ease;
+    z-index: 10000;
+  }
+  
+  body {
+    cursor: none; 
+  }
+  
+  .nav-item:hover ~ #custom-cursor,
+  button:hover ~ #custom-cursor,
+  a:hover ~ #custom-cursor,
+  img:hover ~ #custom-cursor,
+  .resume-button:hover ~ #custom-cursor,
+  input:hover ~ #custom-cursor,
+  textarea:hover ~ #custom-cursor,
+  select:hover ~ #custom-cursor,
+  .card:hover ~ #custom-cursor {
+    width: 55px;
+    height: 55px;
+    background-color: rgba(199, 199, 199, 0.1);
+  }
+  
+  
+  @media (max-width: 767px) {
+    #custom-cursor {
+      display: none;
+    }
+    body {
+      cursor: default;
+    }
+  }

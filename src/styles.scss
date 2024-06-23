@@ -1,0 +1,14 @@
+body {
+    background-color: rgb(22, 29, 35);
+    color:#595959;
+  }
+  
+  .dark-mode {
+    background-color: #fefef5; 
+    color:#595959;
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,22 @@
+
+<div class="container" [ngClass]="{'dark-mode': isDarkMode}">
+      <div class="company-details">
+          <br>
+          <h2>{{ companyDetails?.name }}</h2>
+          <br>
+          <h5>Key Dates:</h5>
+          <h6>      •       Stock Consolidation Ratio: For every 50 shares held, shareholders will receive 1 share.</h6>
+          <h6 *ngIf="!isPrevious && !isNext">• Record Date: {{ companyDetails?.recordDate | date: 'dd MMMM yyyy' }}</h6>
+          <h6 *ngIf="!isPrevious && !isNext">•  Effective Date: {{ companyDetails?.effectiveDate | date: 'dd MMMM yyyy' }}</h6>
+       
+          <br>
+
+          <div *ngIf="!isNext">
+            <p>Shareholders who hold fewer than 50 shares will be compensated in cash in due course. The cash compensation will be based on the market price of the shares at the time of the consolidation.</p>     
+      
+            <p>This consolidation is part of our strategy to enhance the marketability of our shares and to streamline our share structure. We believe this will position {{ companyDetails?.name }} for future growth and provide long-term benefits to our shareholders.</p>
+            <a href="https://wa.me/918690489919" target="_blank" class="chat-button">Chat Now</a>
+          </div>
+    </div>
+</div>
+

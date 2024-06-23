@@ -1,0 +1,177 @@
+.container-custom {
+    padding: 20px;
+    font-family: 'Arial, sans-serif';
+  
+    &.dark-mode {
+  
+      .card {
+        background-color: #888888;
+        border-color: #888888;
+      }
+  
+      .market-status-card {
+        background-color: #888888;
+        border-color: #888888;
+      }
+    }
+  }
+  
+  .about-section {
+    max-width: 800px;
+    margin: 0 auto;
+  
+    h1, h2 {
+      color: #888888;
+      text-align: center;
+      margin-bottom: 20px;
+  
+      &.dark-mode {
+        color: #f5f5f5;
+      }
+    }
+  
+    h1 {
+      font-size: 2.5em;
+      margin-top: 20px;
+    }
+  
+    h2 {
+      font-size: 2em;
+      margin-top: 30px;
+    }
+  
+    p {
+      font-size: 1em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: justify;
+  
+      &.dark-mode {
+        color: #e5e5e5;
+      }
+    }
+  
+    ul {
+      list-style: disc;
+      margin-left: 20px;
+      margin-bottom: 20px;
+  
+      li {
+        font-size: 1em;
+        line-height: 1.6;
+        margin-bottom: 10px;
+  
+        &.dark-mode {
+          color: #e5e5e5;
+        }
+      }
+    }
+  
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+  
+      .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+      }
+  
+      p {
+        font-size: 1em;
+        text-align: center;
+  
+        a {
+          color: #007bff;
+          text-decoration: none;
+  
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  
+  .flex-end-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+  
+    &.card-flex-end {
+      flex: 1 1 auto;
+    }
+  
+    &.card-custom {
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  
+    .card-body {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+  
+  .market-status-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    padding: 15px;
+    text-align: center;
+  
+    .market-header {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+  
+    .market-info {
+      .market {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+  
+        .market-name {
+          font-weight: bold;
+        }
+  
+        .market-status {
+          &.open {
+            color: green;
+          }
+  
+          &.closed {
+            color: red;
+          }
+        }
+      }
+  
+      .market-time {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+  
+        .market-name {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  
