@@ -40,16 +40,12 @@ export class HomeComponent implements OnInit {
     const ukOpenTimeUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 8, 0)); // 8:00 AM GMT => 8:00 UTC
     const ukCloseTimeUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 16, 30)); // 4:30 PM GMT => 16:30 UTC
 
-    console.log('Current Time:', now);
-    console.log('US Market Open Time UTC:', usOpenTimeUTC);
-    console.log('US Market Close Time UTC:', usCloseTimeUTC);
-    console.log('UK Market Open Time UTC:', ukOpenTimeUTC);
-    console.log('UK Market Close Time UTC:', ukCloseTimeUTC);
-
     // Determine market status based on current time and open/close times
     this.usMarketStatus = this.isMarketOpen(now, usOpenTimeUTC, usCloseTimeUTC) ? 'Open' : 'Closed';
     this.ukMarketStatus = this.isMarketOpen(now, ukOpenTimeUTC, ukCloseTimeUTC) ? 'Open' : 'Closed';
   }
+
+  
 
   isMarketOpen(currentTime: Date, openTime: Date, closeTime: Date): boolean {
     return currentTime >= openTime && currentTime <= closeTime;
@@ -64,6 +60,8 @@ export class HomeComponent implements OnInit {
   }
 
   navigateTo(path: string) {
+    console.log(`Navigating to: /admin/${path}`);
     this.router.navigate([`/admin/${path}`]);
   }
+  
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -17,6 +17,9 @@ import { DividendDetailComponent } from './components/dividend-detail/dividend-d
 import { StockSplitDetailComponent } from './components/stock-split-detail/stock-split-detail.component';
 import { ConsolidationDetailComponent } from './components/consolidation-detail/consolidation-detail.component';
 import { DelistingDetailComponent } from './components/delisting-detail/delisting-detail.component';
+import { StockFileComponent } from './components/stock-file/stock-file.component';
+import { FundFileComponent } from './components/fund-file/fund-file.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -33,13 +36,23 @@ import { DelistingDetailComponent } from './components/delisting-detail/delistin
     DividendDetailComponent,
     StockSplitDetailComponent,
     ConsolidationDetailComponent,
-    DelistingDetailComponent
+    DelistingDetailComponent,
+    StockFileComponent,
+    FundFileComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      closeButton: true,
+      progressBar: true,
+    })    
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [],
 })
 export class AdminModule { }

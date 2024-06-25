@@ -1,6 +1,6 @@
 <div class="container container-custom" [ngClass]="{'dark-mode': isDarkMode}">
     <div class="flex-end-wrapper">
-      <div class="card card-flex-end">
+      <div class=" card-flex-end">
         <div class="market-status-card">
             <div class="market-header">Market Status</div>
             <div class="market-info">
@@ -21,6 +21,16 @@
             </div>
           </div>
       </div>
+
+      <div class="market-status-card mb-3 mt-4">
+        <div class="card-body">
+          <div class="card-title">Tomorrow's Market Status</div>
+          <div>
+           
+          </div>
+        </div>
+      </div>
+      
     </div>
     <div class="card card-custom mb-3 mt-3" (click)="navigateTo('dividend')">
       <div class="card-body">
@@ -42,4 +52,36 @@
         Delisting
       </div>
     </div>
+
   </div>
+
+
+
+
+  <div class="flex-start-wrapper">
+    <div class=" card-flex-start" >
+      <div class="arrow-cards" (click)="navigateTo('stock-file')">
+        <div class="arrow-card">
+          <div class="card-body">
+            <div class="card-title" style="text-align: center;">Stock File</div>
+          </div>
+        </div>        
+        <div class="arrow-card mt-4" (click)="navigateTo('fund-file')"> 
+          <div class="card-body">
+            <div class="card-title" style="text-align: center;">Fund File</div>
+          </div>
+        </div>        
+      </div>
+    </div>
+
+    <!-- <div class="feedback-box">
+      <form>
+        <label for="feedback" class="feedback-label">Write your feedback:</label>
+        <textarea id="feedback" name="feedback" rows="4" class="feedback-input" placeholder="Write your feedback here..."></textarea>
+        <button type="submit" class="submit-button">Submit Feedback</button>
+      </form>
+    </div> -->
+  </div>
+  
+
+

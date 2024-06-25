@@ -11,6 +11,8 @@ import { DividendDetailComponent } from './components/dividend-detail/dividend-d
 import { StockSplitDetailComponent } from './components/stock-split-detail/stock-split-detail.component';
 import { ConsolidationDetailComponent } from './components/consolidation-detail/consolidation-detail.component';
 import { DelistingDetailComponent } from './components/delisting-detail/delisting-detail.component';
+import { StockFileComponent } from './components/stock-file/stock-file.component';
+import { FundFileComponent } from './components/fund-file/fund-file.component';
 
 const routes: Routes = [
   {
@@ -27,7 +29,9 @@ const routes: Routes = [
       { path: 'consolidation', component: ConsolidationComponent },
       { path: 'consolidation/:id', component: ConsolidationDetailComponent },
       { path: 'delisting', component: DelistingComponent },
-      { path: 'delisting/:id', component: DelistingDetailComponent }
+      { path: 'delisting/:id', component: DelistingDetailComponent },
+      { path: 'stock-file', component: StockFileComponent},
+      { path: 'fund-file', component: FundFileComponent}
     ]
   }
 ];

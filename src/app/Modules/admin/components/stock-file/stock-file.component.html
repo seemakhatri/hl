@@ -1,0 +1,34 @@
+<div class="container">
+    <form [formGroup]="stockForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="stockName">Stock Name</label>
+          <input type="text" class="form-control" id="stockName" formControlName="stockName">
+          <div *ngIf="stockForm.get('stockName')?.invalid && stockForm.get('stockName')?.touched" class="invalid-feedback">
+            Stock Name is required.
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="isin">ISIN</label>
+          <input type="text" class="form-control" id="isin" formControlName="isin">
+          <div *ngIf="stockForm.get('isin')?.invalid && stockForm.get('isin')?.touched" class="invalid-feedback">
+            ISIN is required.
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="sedolOrTicker">SEDOL or Ticker</label>
+          <input type="text" class="form-control" id="sedolOrTicker" formControlName="sedolOrTicker">
+          <div *ngIf="stockForm.get('sedolOrTicker')?.invalid && stockForm.get('sedolOrTicker')?.touched" class="invalid-feedback">
+            SEDOL or Ticker is required.
+          </div>
+        </div>
+
+        <div class="message">
+            <p>If eligible for the platform, shares will typically take 4 working days to be added. ETFs and Investment Trusts can take up to 2 weeks to be added as we require regulatory data to be provided to Funds Library.</p>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">SUBMIT</button>
+      </form>
+      
+</div>

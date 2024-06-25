@@ -1,0 +1,34 @@
+<div class="container">
+    <form [formGroup]="fundForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="fundName">Fund Name</label>
+          <input type="text" class="form-control" id="fundName" formControlName="fundName">
+          <div *ngIf="fundForm.get('fundName')?.invalid && fundForm.get('fundName')?.touched" class="invalid-feedback">
+            Fund Name is required.
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="isin">ISIN</label>
+          <input type="text" class="form-control" id="isin" formControlName="isin">
+          <div *ngIf="fundForm.get('isin')?.invalid && fundForm.get('isin')?.touched" class="invalid-feedback">
+            ISIN is required.
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="sedolOrTicker">SEDOL or Ticker</label>
+          <input type="text" class="form-control" id="sedolOrTicker" formControlName="sedolOrTicker">
+          <div *ngIf="fundForm.get('sedolOrTicker')?.invalid && fundForm.get('sedolOrTicker')?.touched" class="invalid-feedback">
+            SEDOL or Ticker is required.
+          </div>
+        </div>
+
+        <div class="message">
+            <p>If eligible for the platform, funds will take around 3-4 weeks to be added to the platform.</p>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">SUBMIT</button>
+      </form>
+      
+</div>
