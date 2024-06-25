@@ -43,7 +43,7 @@
         .market-time {
           display: flex;
           justify-content: space-between;
-          margin: 10px 0;
+          margin: 2px 0;
         }
     
         .market-name {
@@ -166,7 +166,7 @@
       width: 100%;
       max-width: none; 
       margin-bottom: 15px; 
-      margin-top: 200px;
+      margin-top: 360px;
     }
 
     .flex-start-wrapper {
@@ -244,17 +244,19 @@
   .feedback-box {
     position: relative;
     border-radius: 5px;
-    padding: 30px;
-    width: 30%;
-
+    padding: 15px;
+    width: 100%;
+    margin-top: 30px;
   }
-
+  
   .feedback-label {
     display: block;
     font-size: 18px;
+    margin-top: 20px;
     margin-bottom: 8px;
     color: #888888;
   }
+  
   .feedback-input {
     width: 100%;
     padding: 10px;
@@ -263,8 +265,16 @@
     border-radius: 4px;
     resize: vertical;
   }
-  .submit-button {
-    margin-top: 10px;
+  
+  .button-row {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  .submit-button,
+  .additional-button {
     padding: 8px 20px;
     font-size: 14px;
     background: linear-gradient(to right, #4b79a1, #283e51);
@@ -273,3 +283,8 @@
     border-radius: 4px;
     cursor: pointer;
   }
+  
+  .additional-button {
+    margin-left: 10px;
+  }
+  

@@ -5,30 +5,21 @@
             <div class="market-header">Market Status</div>
             <div class="market-info">
               <div class="market">
-                <span class="market-name">US Market:</span>
+                <span class="market-name">US Market (2:30 PM - 21:00 PM):</span>
                 <span class="market-status" [ngClass]="{'open': usMarketStatus === 'Open', 'closed': usMarketStatus === 'Closed'}">{{ usMarketStatus }}</span>
               </div>
               <div class="market">
-                <span class="market-name">UK Market:</span>
+                <span class="market-name">UK Market (8:00 AM - 4:30 PM ):</span>
                 <span class="market-status" [ngClass]="{'open': ukMarketStatus === 'Open', 'closed': ukMarketStatus === 'Closed'}">{{ ukMarketStatus }}</span>
-              </div>
-              <div class="market-time">
-                <span class="market-name">US Market Opens at:</span> 9:30 AM EST
-              </div>
-              <div class="market-time">
-                <span class="market-name">UK Market Opens at:</span> 8:00 AM GMT
               </div>
             </div>
           </div>
       </div>
 
-      <div class="market-status-card mb-3 mt-4">
-        <div class="card-body">
-          <div class="card-title">Tomorrow's Market Status</div>
-          <div>
-           
-          </div>
-        </div>
+  
+
+      <div class="market-status-message mb-3 mt-4">
+        <div>{{ marketTomorrowMessage }}</div>
       </div>
       
     </div>
@@ -74,13 +65,26 @@
       </div>
     </div>
 
-    <!-- <div class="feedback-box">
-      <form>
-        <label for="feedback" class="feedback-label">Write your feedback:</label>
-        <textarea id="feedback" name="feedback" rows="4" class="feedback-input" placeholder="Write your feedback here..."></textarea>
-        <button type="submit" class="submit-button">Submit Feedback</button>
+    <div class="feedback-box">
+      <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="feedback-label">Write your feedback:</label>
+          <input type="text" class="form-control" id="feedback" formControlName="feedback" class="feedback-input">
+          <div *ngIf="feedbackForm.get('feedback')?.invalid && feedbackForm.get('feedback')?.touched" class="invalid-feedback">
+            Feedback is required
+          </div>
+        </div>
+        <div class="button-row">
+          <button type="submit" class="submit-button">Submit Feedback</button>
+          <button type="button" class="additional-button">View Feedbacks</button>
+        </div>
       </form>
-    </div> -->
+      
+    </div>
+
+
+
+    
   </div>
   
 
