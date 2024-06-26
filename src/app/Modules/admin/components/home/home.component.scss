@@ -30,36 +30,40 @@
       text-align: center;
     
       .market-header {
-        font-size: 1.5em;
+        font-size: 1.3em;
         margin-bottom: 10px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        padding-bottom: 10px;
+        padding-bottom: 5px;
       }
     
       .market-info {
-        margin-top: 10px;
+        margin-top: 0px;
     
         .market,
         .market-time {
           display: flex;
           justify-content: space-between;
-          margin: 2px 0;
+          margin: 0 0;
         }
     
         .market-name {
           font-weight: bold;
+          font-size: 15px;
         }
     
         .market-status {
-          padding: 5px 10px;
+          padding: 2px;
           border-radius: 5px;
+          font-size: 15px;
     
           &.open {
-            color: #4caf50;
+            color: rgb(72, 255, 0);
+            font-weight: bold;
           }
     
           &.closed {
-            color: #f44336;
+            color: #ff1100;
+            font-weight: bold;
           }
         }
       }
@@ -286,5 +290,13 @@
   
   .additional-button {
     margin-left: 10px;
+  }
+  
+
+  .highlight {
+    color: rgb(72, 255, 0);
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: capitalize;
   }
   

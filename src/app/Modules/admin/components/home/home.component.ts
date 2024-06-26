@@ -13,30 +13,26 @@ import { ToasterService } from 'src/app/services/toaster.service';
 export class HomeComponent implements OnInit {
   usMarketStatus: string = '';
   ukMarketStatus: string = '';
-  tomorrowUsMarketStatus: string = '';
-  tomorrowUkMarketStatus: string = '';
-  usMarketOpenTomorrow: boolean = false; 
-  ukMarketOpenTomorrow: boolean = false; 
-  marketTomorrowMessage: string = '';
+  usMarketTomorrowMessage: string = '';
+  ukMarketTomorrowMessage: string = '';
   feedbackForm!: FormGroup;
 
-  constructor(private router: Router,
-     private themeService: ThemeService,
-      private http: HttpClient,
-       private fb: FormBuilder,
-       private toasterService: ToasterService,
-      ) {}
+  constructor(
+    private router: Router,
+    private themeService: ThemeService,
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private toasterService: ToasterService,
+  ) {}
 
-      ngOnInit(): void {
-        this.createForm(); 
-        this.updateMarketStatus();
-        this.updateTomorrowMarketStatus();
-        setInterval(() => {
-          this.updateMarketStatus();
-          this.updateTomorrowMarketStatus();
-        }, 60000); // Update every minute
-      }
-      
+  ngOnInit(): void {
+    this.createForm(); 
+    this.updateMarketStatus();
+    setInterval(() => {
+      this.updateMarketStatus();
+    }, 60000); // Update every minute
+  }
+  
   createForm() {
     this.feedbackForm = this.fb.group({
       feedback: ['', Validators.required]
@@ -47,13 +43,9 @@ export class HomeComponent implements OnInit {
     return this.feedbackForm.get('feedback');
   }
 
-
-  
-
   onSubmit() {
     if (this.feedbackForm.valid) {
       this.http.post('https://hl-backend-r8qx.onrender.com/api/feedback', this.feedbackForm.value)
-
         .subscribe(
           (response) => {
             this.toasterService.success('Feedback sent successfully!', 'Success');
@@ -68,67 +60,94 @@ export class HomeComponent implements OnInit {
       this.feedbackForm.markAllAsTouched();
     }
   }
-
   updateMarketStatus() {
     const now = new Date();
-
+    const ukTimeString = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/London',
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    }).format(now);
+    
+    const [date, time] = ukTimeString.split(', ');
+    const [day, month, year] = date.split('/').map(Number);
+    const [hours, minutes, seconds] = time.split(':').map(Number);
+    
+    const ukTime = new Date(year, month - 1, day, hours, minutes, seconds);
+  
+    console.log('Current UK Time:', ukTime);
+  
     // Check if it's a weekend
-    const isWeekend = now.getUTCDay() === 0 || now.getUTCDay() === 6;
-
+    const isWeekend = ukTime.getDay() === 0 || ukTime.getDay() === 6;
+  
     if (isWeekend) {
       this.usMarketStatus = 'Closed';
       this.ukMarketStatus = 'Closed';
+      this.usMarketTomorrowMessage = 'The US market will be closed tomorrow.';
+      this.ukMarketTomorrowMessage = 'The UK market will be closed tomorrow.';
       return;
     }
-
-    // US market times in GMT
-    const usOpenTimeGMT = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 13, 30)); // 9:30 AM ET => 13:30 GMT
-    const usCloseTimeGMT = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 20, 0)); // 4:00 PM ET => 20:00 GMT
-
-    // UK market times in GMT
-    const ukOpenTimeGMT = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 8, 0)); // 8:00 AM GMT => 8:00 GMT
-    const ukCloseTimeGMT = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 16, 30)); // 4:30 PM GMT => 16:30 GMT
-
+  
+    // Market times in local UK time
+    const usMarketOpenTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 14, 30); // 2:30 PM UK time
+    const usMarketCloseTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 21, 0); // 9:00 PM UK time
+    const ukMarketOpenTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 8, 0); // 8:00 AM UK time
+    const ukMarketCloseTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 16, 30); // 4:30 PM UK time
+  
+    console.log('US Market Open Time (UK):', usMarketOpenTimeUK);
+    console.log('US Market Close Time (UK):', usMarketCloseTimeUK);
+    console.log('UK Market Open Time:', ukMarketOpenTimeUK);
+    console.log('UK Market Close Time:', ukMarketCloseTimeUK);
+  
     // Determine market status based on current time and open/close times
-    this.usMarketStatus = this.isMarketOpen(now, usOpenTimeGMT, usCloseTimeGMT) ? 'Open' : 'Closed';
-    this.ukMarketStatus = this.isMarketOpen(now, ukOpenTimeGMT, ukCloseTimeGMT) ? 'Open' : 'Closed';
+    this.usMarketStatus = this.isMarketOpen(ukTime, usMarketOpenTimeUK, usMarketCloseTimeUK) ? 'Open' : 'Closed';
+    this.ukMarketStatus = this.isMarketOpen(ukTime, ukMarketOpenTimeUK, ukMarketCloseTimeUK) ? 'Open' : 'Closed';
+  
+    console.log('US Market Status:', this.usMarketStatus);
+    console.log('UK Market Status:', this.ukMarketStatus);
+  
+    this.updateTomorrowMarketStatus();
   }
+  
+  isMarketOpen(currentTime: Date, openTime: Date, closeTime: Date): boolean {
+    return currentTime >= openTime && currentTime <= closeTime;
+  }
+
+
 
   updateTomorrowMarketStatus() {
     const now = new Date();
-    const tomorrow = new Date(now);
-    tomorrow.setDate(now.getUTCDate() + 1);
-
-    // US market times for tomorrow in GMT
-    const tomorrowUsOpenTimeGMT = new Date(Date.UTC(tomorrow.getUTCFullYear(), tomorrow.getUTCMonth(), tomorrow.getUTCDate(), 13, 30)); // US market opens tomorrow
-    const tomorrowUsCloseTimeGMT = new Date(Date.UTC(tomorrow.getUTCFullYear(), tomorrow.getUTCMonth(), tomorrow.getUTCDate(), 20, 0)); // US market closes tomorrow
-
-    // UK market times for tomorrow in GMT
-    const tomorrowUkOpenTimeGMT = new Date(Date.UTC(tomorrow.getUTCFullYear(), tomorrow.getUTCMonth(), tomorrow.getUTCDate(), 8, 0)); // UK market opens tomorrow
-    const tomorrowUkCloseTimeGMT = new Date(Date.UTC(tomorrow.getUTCFullYear(), tomorrow.getUTCMonth(), tomorrow.getUTCDate(), 16, 30)); // UK market closes tomorrow
-
-    // Determine tomorrow's market status
-    this.usMarketOpenTomorrow = this.isMarketOpen(now, tomorrowUsOpenTimeGMT, tomorrowUsCloseTimeGMT);
-    this.ukMarketOpenTomorrow = this.isMarketOpen(now, tomorrowUkOpenTimeGMT, tomorrowUkCloseTimeGMT);
-
-    // Set status strings for display
-    this.tomorrowUsMarketStatus = this.usMarketOpenTomorrow ? 'Open' : 'Closed';
-    this.tomorrowUkMarketStatus = this.ukMarketOpenTomorrow ? 'Open' : 'Closed';
-
-    // Set market tomorrow message
-    if (this.usMarketOpenTomorrow && this.ukMarketOpenTomorrow) {
-      this.marketTomorrowMessage = 'The US and UK markets will remain open tomorrow.';
-    } else if (this.usMarketOpenTomorrow && !this.ukMarketOpenTomorrow) {
-      this.marketTomorrowMessage = 'The US market will remain open tomorrow, but the UK market will be closed.';
-    } else if (!this.usMarketOpenTomorrow && this.ukMarketOpenTomorrow) {
-      this.marketTomorrowMessage = 'The UK market will remain open tomorrow, but the US market will be closed.';
+    const ukTimeString = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/London',
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    }).format(now);
+  
+    const [date, time] = ukTimeString.split(', ');
+    const [day, month, year] = date.split('/').map(Number);
+    const [hours, minutes, seconds] = time.split(':').map(Number);
+    
+    const ukTime = new Date(year, month - 1, day, hours, minutes, seconds);
+    const tomorrow = new Date(ukTime);
+    tomorrow.setDate(ukTime.getDate() + 1);
+  
+    // Check if tomorrow is a weekend
+    const isWeekendTomorrow = tomorrow.getDay() === 0 || tomorrow.getDay() === 6;
+  
+    if (isWeekendTomorrow) {
+      this.usMarketTomorrowMessage = 'Closed';
+      this.ukMarketTomorrowMessage = 'Closed';
     } else {
-      this.marketTomorrowMessage = 'Both the US and UK markets will be closed tomorrow.';
+      this.usMarketTomorrowMessage = 'Open';
+      this.ukMarketTomorrowMessage = 'Open';
     }
-  }
-
-  isMarketOpen(currentTime: Date, openTime: Date, closeTime: Date): boolean {
-    return currentTime >= openTime && currentTime <= closeTime;
   }
 
   toggleDarkMode() {

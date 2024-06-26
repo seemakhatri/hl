@@ -44,7 +44,7 @@ export class DividendDetailComponent implements OnInit {
         this.companyDetails = { id, name: 'Company A', description: 'Company A specializes in technology products.', exDividendDate: '2024-03-20', paymentDate: '2024-04-05' };
         break;
       case '2':
-        this.companyDetails = { id, name: 'Company B', description: 'Company B operates in the energy sector.', exDividendDate: '2024-04-20', paymentDate: '2024-05-10' };
+        this.companyDetails = { id, name: 'Company B', description: 'Company B operates in the energy sector.', exDividendDate: '2024-06-8', paymentDate: '2024-07-10' };
         break;
       case '3':
         this.companyDetails = { id, name: 'Company C', description: 'Company C is known for its healthcare services.', exDividendDate: '2024-06-01', paymentDate: '2024-06-30' };
