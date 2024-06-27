@@ -1,0 +1,100 @@
+:host {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 60vh;
+  }
+  
+  .card-custom {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    color: #cbcbcb;
+    background-color: transparent;
+    border: 1px solid #525252;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .container-custom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #9f9f9f;
+  }
+  
+  .ipo-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f8b400;
+    margin-bottom: 15px;
+  }
+  
+  .ipo-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .first-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .info-block {
+    margin-bottom: 15px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .info-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .info-detail {
+    font-size: 14px;
+  }
+  
+  .back-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(to right, #4b79a1, #283e51);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .back-button:hover {
+    background: linear-gradient(to right, #3a5a70, #1c2c37);
+  }
+  
+  .dark-mode .container-custom {
+    background-color: #fefef5;
+    border: 1px solid #d2d2d2;
+    color: #888888;
+  }
+  
+  .dark-mode .card-custom {
+    background-color: #ffffff;
+    border: 1px solid #c9c9c9;
+    color: #888888;
+  }
+  
+  @media (max-width: 768px) {
+    .container-custom {
+      align-items: flex-start;
+    }
+    .card-flex-end {
+      width: 100%;
+    }
+  }
+  

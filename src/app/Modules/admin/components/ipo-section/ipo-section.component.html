@@ -1,0 +1,13 @@
+<div class="container container-custom" [ngClass]="{'dark-mode': isDarkMode}">
+    <div class="card card-custom mt-3" *ngFor="let ipo of upcomingIPOs"  (click)="viewDetails(ipo)">
+        <div class="card-body">
+            <h5 class="card-title">{{ ipo.companyName }}</h5>
+            <div class="card-title-date">
+              <div class="card-date">{{ ipo.date | date }}</div>
+              <div class="card-text">{{ ipo.description }}</div>
+            </div>
+          </div>
+      </div>
+  </div>
+
+  

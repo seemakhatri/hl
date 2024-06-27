@@ -2,8 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FeedbackService } from 'src/app/services/feedback.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ToasterService } from 'src/app/services/toaster.service';
+
+
 
 @Component({
   selector: 'app-home',
@@ -23,6 +26,7 @@ export class HomeComponent implements OnInit {
     private http: HttpClient,
     private fb: FormBuilder,
     private toasterService: ToasterService,
+    private feedbackService: FeedbackService,
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +39,7 @@ export class HomeComponent implements OnInit {
   
   createForm() {
     this.feedbackForm = this.fb.group({
+      userName: ['', Validators.required],
       feedback: ['', Validators.required]
     });
   }
@@ -45,21 +50,25 @@ export class HomeComponent implements OnInit {
 
   onSubmit() {
     if (this.feedbackForm.valid) {
-      this.http.post('https://hl-backend-r8qx.onrender.com/api/feedback', this.feedbackForm.value)
-        .subscribe(
-          (response) => {
-            this.toasterService.success('Feedback sent successfully!', 'Success');
-            console.log('Inquiry sent successfully:', response);
-            this.feedbackForm.reset();
-          },
-          (error) => {
-            console.error('Error sending Feedback', error);
-          }
-        );
-    } else {
-      this.feedbackForm.markAllAsTouched();
+      const userName = this.feedbackForm.value.userName;
+      const feedback = this.feedbackForm.value.feedback;
+
+      this.feedbackService.postFeedback(userName, feedback).subscribe(
+        response => {
+          console.log(response.message);
+          this.toasterService.success('Feedback submitted successfully');
+          this.feedbackForm.reset();
+        },
+        error => {
+          console.error('Error submitting feedback:', error);
+          this.toasterService.error('Error submitting feedback');
+        }
+      );
     }
   }
+
+
+
   updateMarketStatus() {
     const now = new Date();
     const ukTimeString = new Intl.DateTimeFormat('en-GB', {
@@ -92,16 +101,11 @@ export class HomeComponent implements OnInit {
     }
   
     // Market times in local UK time
-    const usMarketOpenTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 14, 30); // 2:30 PM UK time
-    const usMarketCloseTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 21, 0); // 9:00 PM UK time
-    const ukMarketOpenTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 8, 0); // 8:00 AM UK time
-    const ukMarketCloseTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 16, 30); // 4:30 PM UK time
-  
-    console.log('US Market Open Time (UK):', usMarketOpenTimeUK);
-    console.log('US Market Close Time (UK):', usMarketCloseTimeUK);
-    console.log('UK Market Open Time:', ukMarketOpenTimeUK);
-    console.log('UK Market Close Time:', ukMarketCloseTimeUK);
-  
+    const usMarketOpenTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 14, 30); 
+    const usMarketCloseTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 21, 0); 
+    const ukMarketOpenTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 8, 0);
+    const ukMarketCloseTimeUK = new Date(ukTime.getFullYear(), ukTime.getMonth(), ukTime.getDate(), 16, 30);
+
     // Determine market status based on current time and open/close times
     this.usMarketStatus = this.isMarketOpen(ukTime, usMarketOpenTimeUK, usMarketCloseTimeUK) ? 'Open' : 'Closed';
     this.ukMarketStatus = this.isMarketOpen(ukTime, ukMarketOpenTimeUK, ukMarketCloseTimeUK) ? 'Open' : 'Closed';
@@ -159,7 +163,9 @@ export class HomeComponent implements OnInit {
   }
 
   navigateTo(path: string) {
-    console.log(`Navigating to: /admin/${path}`);
     this.router.navigate([`/admin/${path}`]);
   }
+
+
+  
 }

@@ -1,0 +1,21 @@
+<div class="container container-custom" [ngClass]="{'dark-mode': isDarkMode}">
+    <div *ngIf="loading; else content">
+      <!-- Loading indicator -->
+      <p>Loading feedbacks...</p>
+    </div>
+    <ng-template #content>
+      <div *ngIf="feedbacks.length > 0; else noFeedbacks">
+        <div *ngFor="let feedback of feedbacks" class="card card-custom mb-3 mt-3">
+          <div class="card-body">
+            <p class="card-text">{{ feedback.content }}</p>
+            <small>Submitted by: {{ feedback.userName }} | {{ feedback.timestamp | date }}</small>
+            <!-- <button (click)="deleteFeedback(feedback.id)">Delete</button> -->
+          </div>
+        </div>
+      </div>
+      <ng-template #noFeedbacks>
+        <p>No feedbacks available.</p>
+      </ng-template>
+    </ng-template>
+  </div>
+  

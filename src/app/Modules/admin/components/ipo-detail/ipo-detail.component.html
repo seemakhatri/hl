@@ -1,0 +1,43 @@
+<div class="container container-custom" [ngClass]="{'dark-mode': isDarkMode}">
+    <div *ngIf="ipo" class="card card-custom">
+      <h1 class="ipo-title">{{ ipo.companyName }}</h1>
+      <div class="ipo-info">
+        <div class="info-grid">
+          <div class="info-block">
+            <div class="info-title">Issue Size:</div>
+            <div class="info-detail">{{ ipo.issueSize }}</div>
+          </div>
+          <div class="info-block">
+            <div class="info-title">Minimum Investment:</div>
+            <div class="info-detail">{{ ipo.minInvestment }}</div>
+          </div>
+          <div class="info-block">
+            <div class="info-title">Number of Shares:</div>
+            <div class="info-detail">{{ ipo.numberOfShares }}</div>
+          </div>
+          <div class="info-block">
+            <div class="info-title">Lot Size:</div>
+            <div class="info-detail">{{ ipo.lotSize }}</div>
+          </div>
+          <div class="info-block">
+            <div class="info-title">Offer Price:</div>
+            <div class="info-detail">{{ ipo.offerPrice }}</div>
+          </div>
+        </div>
+        <div class="info-block full-width">
+          <div class="info-title">About the Company:</div>
+          <div class="info-detail">{{ ipo.aboutCompany }}</div>
+        </div>
+        <div class="info-block full-width">
+          <div class="info-title">Strengths:</div>
+          <div class="info-detail">{{ ipo.strengths.join(', ') }}</div>
+        </div>
+        <div class="info-block full-width">
+          <div class="info-title">Risks:</div>
+          <div class="info-detail">{{ ipo.risks.join(', ') }}</div>
+        </div>
+      </div>
+      <button class="back-button" (click)="goBack()">Back to IPO List</button>
+    </div>
+  </div>
+  

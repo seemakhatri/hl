@@ -61,20 +61,28 @@
           <div class="card-title" style="text-align: center;">Fund File</div>
         </div>
       </div>
+      <div class="arrow-card mt-4" (click)="navigateTo('ipo-section')">
+        <div class="card-body">
+          <div class="card-title" style="text-align: center;">IPO</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="feedback-box">
-    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="feedback-label">Write your feedback:</label>
-        <input type="text" class="form-control" id="feedback" formControlName="feedback" class="feedback-input">
-        <div *ngIf="feedbackForm.get('feedback')?.invalid && feedbackForm.get('feedback')?.touched" class="invalid-feedback">Feedback is required</div>
-      </div>
-      <div class="button-row">
-        <button type="submit" class="submit-button">Submit Feedback</button>
-        <button type="button" class="additional-button">View Feedbacks</button>
-      </div>
-    </form>
-  </div>
+<div class="feedback-box">
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="userName">Your Name</label>
+      <input type="text" class="form-control" id="userName" formControlName="userName">
+    </div>
+    <div class="form-group">
+      <label for="feedback">Write your feedback:</label>
+      <textarea id="feedback" class="form-control" formControlName="feedback"></textarea>
+      <div *ngIf="feedbackForm.get('feedback')?.invalid && feedbackForm.get('feedback')?.touched" class="invalid-feedback">Feedback is required</div>
+    </div>
+    <div class="button-row">
+      <button type="submit" class="submit-button">Submit Feedback</button>
+      <button type="button" class="additional-button" (click)="navigateTo('view-feedbacks')">View Feedbacks</button>
+    </div>
+  </form>
 </div>

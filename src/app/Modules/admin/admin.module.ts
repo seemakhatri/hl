@@ -20,6 +20,9 @@ import { DelistingDetailComponent } from './components/delisting-detail/delistin
 import { StockFileComponent } from './components/stock-file/stock-file.component';
 import { FundFileComponent } from './components/fund-file/fund-file.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ViewFeedbacksComponent } from './components/view-feedbacks/view-feedbacks.component';
+import { IpoSectionComponent } from './components/ipo-section/ipo-section.component';
+import { IpoDetailComponent } from './components/ipo-detail/ipo-detail.component';
 
 
 @NgModule({
@@ -38,7 +41,10 @@ import { ToastrModule } from 'ngx-toastr';
     ConsolidationDetailComponent,
     DelistingDetailComponent,
     StockFileComponent,
-    FundFileComponent
+    FundFileComponent,
+    ViewFeedbacksComponent,
+    IpoSectionComponent,
+    IpoDetailComponent
   ],
   imports: [
     CommonModule,

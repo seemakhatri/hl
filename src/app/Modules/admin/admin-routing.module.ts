@@ -13,6 +13,9 @@ import { ConsolidationDetailComponent } from './components/consolidation-detail/
 import { DelistingDetailComponent } from './components/delisting-detail/delisting-detail.component';
 import { StockFileComponent } from './components/stock-file/stock-file.component';
 import { FundFileComponent } from './components/fund-file/fund-file.component';
+import { ViewFeedbacksComponent } from './components/view-feedbacks/view-feedbacks.component';
+import { IpoSectionComponent } from './components/ipo-section/ipo-section.component';
+import { IpoDetailComponent } from './components/ipo-detail/ipo-detail.component';
 
 const routes: Routes = [
   {
@@ -31,7 +34,11 @@ const routes: Routes = [
       { path: 'delisting', component: DelistingComponent },
       { path: 'delisting/:id', component: DelistingDetailComponent },
       { path: 'stock-file', component: StockFileComponent},
-      { path: 'fund-file', component: FundFileComponent}
+      { path: 'fund-file', component: FundFileComponent},
+      { path: 'view-feedbacks', component: ViewFeedbacksComponent},
+      { path: 'ipo-section', component: IpoSectionComponent},
+      { path: 'ipo-section/:id', component: IpoDetailComponent}
+
     ]
   }
 ];
