@@ -16,6 +16,7 @@ import { FundFileComponent } from './components/fund-file/fund-file.component';
 import { ViewFeedbacksComponent } from './components/view-feedbacks/view-feedbacks.component';
 import { IpoSectionComponent } from './components/ipo-section/ipo-section.component';
 import { IpoDetailComponent } from './components/ipo-detail/ipo-detail.component';
+import { MarketCalendarComponent } from './components/market-calendar/market-calendar.component';
 
 const routes: Routes = [
   {
@@ -37,7 +38,8 @@ const routes: Routes = [
       { path: 'fund-file', component: FundFileComponent},
       { path: 'view-feedbacks', component: ViewFeedbacksComponent},
       { path: 'ipo-section', component: IpoSectionComponent},
-      { path: 'ipo-section/:id', component: IpoDetailComponent}
+      { path: 'ipo-section/:id', component: IpoDetailComponent},
+      { path: 'market-calender', component: MarketCalendarComponent}
 
     ]
   }

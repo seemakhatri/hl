@@ -297,3 +297,38 @@
     text-transform: capitalize;
   }
   
+
+  .calendar-card {
+    background: linear-gradient(to right, #4b79a1, #283e51);
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .calendar-header {
+    font-size: 1em;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 5px;
+  }
+  
+  .calendar-body {
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  .calendar-body app-market-calendar {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* Dark Mode Styles */
+  .dark-mode .calendar-card {
+    background: linear-gradient(to right, #4b79a1, #283e51);
+    color: white;
+  }
+  

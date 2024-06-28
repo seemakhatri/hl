@@ -112,46 +112,10 @@ export class HomeComponent implements OnInit {
   
     console.log('US Market Status:', this.usMarketStatus);
     console.log('UK Market Status:', this.ukMarketStatus);
-  
-    this.updateTomorrowMarketStatus();
   }
   
   isMarketOpen(currentTime: Date, openTime: Date, closeTime: Date): boolean {
     return currentTime >= openTime && currentTime <= closeTime;
-  }
-
-
-
-  updateTomorrowMarketStatus() {
-    const now = new Date();
-    const ukTimeString = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/London',
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric'
-    }).format(now);
-  
-    const [date, time] = ukTimeString.split(', ');
-    const [day, month, year] = date.split('/').map(Number);
-    const [hours, minutes, seconds] = time.split(':').map(Number);
-    
-    const ukTime = new Date(year, month - 1, day, hours, minutes, seconds);
-    const tomorrow = new Date(ukTime);
-    tomorrow.setDate(ukTime.getDate() + 1);
-  
-    // Check if tomorrow is a weekend
-    const isWeekendTomorrow = tomorrow.getDay() === 0 || tomorrow.getDay() === 6;
-  
-    if (isWeekendTomorrow) {
-      this.usMarketTomorrowMessage = 'Closed';
-      this.ukMarketTomorrowMessage = 'Closed';
-    } else {
-      this.usMarketTomorrowMessage = 'Open';
-      this.ukMarketTomorrowMessage = 'Open';
-    }
   }
 
   toggleDarkMode() {
@@ -165,7 +129,4 @@ export class HomeComponent implements OnInit {
   navigateTo(path: string) {
     this.router.navigate([`/admin/${path}`]);
   }
-
-
-  
 }

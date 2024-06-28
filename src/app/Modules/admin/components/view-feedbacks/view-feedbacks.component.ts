@@ -4,8 +4,8 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 import { ThemeService } from 'src/app/services/theme.service';
 
 export interface Feedback {
-  id: string;
-  content: string;
+  _id: string;
+  feedback: string;
   userName: string; 
   timestamp: Date;
 }
@@ -33,19 +33,18 @@ export class ViewFeedbacksComponent implements OnInit {
     this.feedbackService.getFeedbacks().subscribe(
       data => {
         this.feedbacks = data;
-        this.loading = false; // Hide loading indicator on success
+        this.loading = false;
       },
       error => {
         console.error('Error fetching feedbacks:', error);
-        this.loading = false; // Hide loading indicator on error
+        this.loading = false; 
       }
     );
   }
-
   deleteFeedback(id: string) {
     this.feedbackService.deleteFeedback(id).subscribe(
       () => {
-        this.feedbacks = this.feedbacks.filter(feedback => feedback.id !== id);
+        this.feedbacks = this.feedbacks.filter(feedback => feedback._id !== id);
       },
       error => {
         console.error('Error deleting feedback:', error);

@@ -23,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ViewFeedbacksComponent } from './components/view-feedbacks/view-feedbacks.component';
 import { IpoSectionComponent } from './components/ipo-section/ipo-section.component';
 import { IpoDetailComponent } from './components/ipo-detail/ipo-detail.component';
+import { MarketCalendarComponent } from './components/market-calendar/market-calendar.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { IpoDetailComponent } from './components/ipo-detail/ipo-detail.component
     FundFileComponent,
     ViewFeedbacksComponent,
     IpoSectionComponent,
-    IpoDetailComponent
+    IpoDetailComponent,
+    MarketCalendarComponent
   ],
   imports: [
     CommonModule,

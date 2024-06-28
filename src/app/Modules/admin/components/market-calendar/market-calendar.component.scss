@@ -1,0 +1,132 @@
+.calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      background: linear-gradient(to right, #4b79a1, #283e51);
+      color: white;
+      padding: 4px;
+      border-radius: 5px;
+      margin-bottom: 10px; /* Add margin bottom for spacing */
+    }
+  
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      width: 100%;
+      max-width: 400px; /* Adjust max-width as needed */
+    }
+  
+    .weekday-header {
+      font-weight: bold;
+      text-align: center;
+      color: #f8b400;
+      padding: 5px 0;
+    }
+  
+    .calendar-grid div {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      padding: 5px;
+      position: relative;
+      font-size: 12px;
+      box-sizing: border-box; /* Ensure padding and border are included in width */
+    }
+  
+    .calendar-grid div span {
+      font-size: 10px;
+      text-align: center;
+      position: absolute;
+      bottom: 2px;
+    }
+  
+    .btn-primary {
+      padding: 8px 10px;
+      font-size: 10px;
+      background: linear-gradient(to right, #4b79a1, #283e51);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid rgb(165, 165, 165);
+    }
+  
+    .market-off-us,
+    .market-off-uk,
+    .market-off-both {
+      background-color: #f8b400; /* Default color for holidays */
+      position: absolute;
+      color: white;
+      width: 100%; /* Ensure covers entire cell */
+      height: 100%; /* Ensure covers entire cell */
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      box-sizing: border-box; /* Ensure padding and border are included in width */
+    }
+  
+    .market-off-us {
+      background-color: red; /* US holidays color */
+    }
+  
+    .market-off-uk {
+      background-color: #f8b400; /* UK holidays color */
+    }
+  
+    .market-off-both {
+      background-color: #f8b400; /* Same color as UK holidays for common holidays */
+    }
+  
+    .weekend {
+      background-color: rgba(200, 200, 200, 0.5);
+      color: rgb(255, 255, 255);
+    }
+  
+    .holiday-indicators {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 400px; /* Adjust max-width as needed */
+    }
+  
+    .holiday-caption {
+      margin-right: 10px; /* Adjust margin as needed */
+    }
+  
+    .indicator {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+  
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+  
+    .uk-color {
+      background-color: #f8b400; /* UK color */
+    }
+  
+    .us-color {
+      background-color: red; /* US color */
+    }
+  }
+  
