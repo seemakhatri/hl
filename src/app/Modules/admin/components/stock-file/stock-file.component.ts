@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToasterService } from 'src/app/services/toaster.service';
-import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-stock-file',
@@ -18,7 +17,6 @@ export class StockFileComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private toasterService: ToasterService,
-    private dataService: DataService
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +26,7 @@ export class StockFileComponent implements OnInit {
       sedolOrTicker: ['', Validators.required]
     });
 
-    this.existingData = this.dataService.getExistingData();
+    // this.existingData = this.dataService.getExistingData();
   }
 
   isDuplicateEntry(formData: any): boolean {

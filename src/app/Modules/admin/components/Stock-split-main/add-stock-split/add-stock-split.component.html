@@ -1,0 +1,31 @@
+  <div class="container">
+    <div class="border-0 rounded-4 p-4">
+      <h3 class="mb-4 fw-bold text-center">{{ isEditMode ? 'Edit Stock Split' : 'Add Stock Split' }}</h3>
+      <form (ngSubmit)="onSubmit()" class="row g-4">
+        <div class="col-12">
+          <input type="text" class="form-control shadow-none border" placeholder="Company Name" [(ngModel)]="stockSplit.companyName" name="companyName" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="recordDate" class="form-label">Record Date</label>
+          <input type="date" id="recordDate" class="form-control shadow-none border" [(ngModel)]="stockSplit.recordDate" name="recordDate" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="effectiveDate" class="form-label">Effective Date</label>
+          <input type="date" id="effectiveDate" class="form-control shadow-none border" [(ngModel)]="stockSplit.effectiveDate" name="effectiveDate" required>
+        </div>
+  
+        <div class="col-12">
+          <textarea rows="4" class="form-control shadow-none border" placeholder="Notes or Description (optional)" [(ngModel)]="stockSplit.notes" name="notes"></textarea>
+        </div>
+  
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary px-5 py-2 shadow-sm rounded-pill">
+            {{ isEditMode ? 'Update Stock Split' : 'Add Stock Split' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

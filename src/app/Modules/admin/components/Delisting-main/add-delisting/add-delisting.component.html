@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="border-0 rounded-4 p-4">
+      <h3 class="mb-4 fw-bold text-center">{{ isEditMode ? 'Edit Delisting' : 'Add New Delisting' }}</h3>
+      <form (ngSubmit)="onSubmit()" class="row g-4">
+        <div class="col-12">
+          <input type="text" class="form-control shadow-none border" placeholder="Company Name" [(ngModel)]="delisting.companyName" name="companyName" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="exDate" class="form-label">Ex-Date</label>
+          <input type="date" id="exDate" class="form-control shadow-none border" [(ngModel)]="delisting.exDate" name="exDate" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="paymentDate" class="form-label">Payment Date</label>
+          <input type="date" id="paymentDate" class="form-control shadow-none border" [(ngModel)]="delisting.paymentDate" name="paymentDate" required>
+        </div>
+  
+        <div class="col-12">
+          <textarea rows="4" class="form-control shadow-none border" placeholder="Notes or Description (optional)" [(ngModel)]="delisting.notes" name="notes"></textarea>
+        </div>
+  
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary px-5 py-2 shadow-sm rounded-pill">
+            {{ isEditMode ? 'Update Delisting' : 'Add Delisting' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,31 @@
+<div class="container" [ngClass]="{'dark-mode': isDarkMode}">
+    <!-- Add New Dividend Button -->
+    <div class="header-actions mb-4 text-end">
+      <button class="btn btn-primary" (click)="addNewStockSplit()">
+        Add New Stock Split
+      </button>
+    </div>
+  
+    <div *ngFor="let stockSplit of companies; let i = index" class="company-card"
+    [ngClass]="{'highlight-current-month': isCurrentMonth(stockSplit)}">
+      <div class="company-content" (click)="viewDetails(stockSplit, i)">
+        <div class="company-header">
+          <h3>{{ stockSplit.companyName }}</h3>
+          <div class="action-buttons">
+            <button class="edit-btn" (click)="editDividend(stockSplit, $event)">Edit</button>
+            <button class="delete-btn" (click)="deleteDividend(stockSplit, $event)">Delete</button>
+          </div>
+        </div>
+  
+        <div class="company-details">
+          <span><strong>Record Date:</strong> {{ stockSplit.recordDate | date: 'dd MMMM yyyy' }}</span>
+          <span><strong>Effective Date:</strong> {{ stockSplit.effectiveDate | date: 'dd MMMM yyyy' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+
+  

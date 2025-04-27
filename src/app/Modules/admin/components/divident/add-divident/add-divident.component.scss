@@ -1,0 +1,73 @@
+.container {
+  h3 {
+    font-size: 1.2rem;
+    color: #0d6efd;
+    text-align: left;
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  form {
+    .form-control {
+      border-radius: 0.5rem;
+      border-color: #dee2e6;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+      }
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #495057;
+      margin-bottom: 0.25rem;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+    }
+
+    button[type='submit'] {
+      font-weight: 500;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        background-color: #0b5ed7;
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+/* Make the mat-slide-toggle bigger and remove focus ring */
+.overseas-toggle {
+  transform: scale(1.3); /* Increase size */
+  margin-top: 2px; /* Adjust alignment */
+
+  ::ng-deep .mat-slide-toggle-bar {
+    border-radius: 20px;
+  }
+
+  ::ng-deep .mat-slide-toggle-thumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  ::ng-deep .mat-focus-indicator {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+::ng-deep .mat-slide-toggle.mat-focused .mat-slide-toggle-bar,
+::ng-deep .mat-slide-toggle.mat-focused .mat-slide-toggle-thumb {
+  box-shadow: none !important;
+}

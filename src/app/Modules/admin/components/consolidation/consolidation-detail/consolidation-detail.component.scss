@@ -1,0 +1,43 @@
+.container {
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+  color: #acacac;
+  border: 1px solid rgb(73, 73, 73);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.company-section {
+  text-align: left;
+}
+
+.company-section h3 {
+  margin-top: 10px;
+  color: #f8b400;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+
+
+a.chat-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: #218838;
+  }
+}

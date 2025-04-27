@@ -1,0 +1,156 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end; 
+  margin-bottom: 20px; 
+}
+
+
+.company-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(34, 41, 45);
+  color: #acacac;
+  border: 1px solid rgb(73, 73, 73);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.company-card.highlighted {
+  border-color: #89d69b;
+}
+
+.company-card h3 {
+  color: #f8b400;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.company-card p {
+  color: #b7b7b7;
+  margin-bottom: 6px;
+}
+
+.company-card strong {
+  color: #a8a8a8;
+  margin-right: 5px;
+}
+
+.dark-mode .container {
+  background-color: #fefef5;
+  border: 1px solid rgb(220, 220, 220);
+  color: #888888;
+}
+
+.dark-mode .company-card {
+  background-color: #ffffff;
+  border: 1px solid rgb(220, 220, 220);
+  color: #888888;
+}
+
+.dark-mode .company-card.highlighted {
+  border: 2px solid #03a426;
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .company-card {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.company-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.company-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 5px;
+}
+
+.company-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; 
+  gap: 20px;
+  font-size: 0.95rem;
+  color: inherit;
+  font-weight: bold; 
+}
+
+.company-details span {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start; 
+}
+
+.company-details strong {
+  margin-right: 6px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #e0ecff;
+  color: #0056b3;
+}
+
+.delete-btn {
+  background-color: #ffe9e9;
+  color: #b20000;
+}
+
+.edit-btn:hover {
+  background-color: #d3e4ff;
+}
+
+.delete-btn:hover {
+  background-color: #ffd2d2;
+}
+
+@media (max-width: 768px) {
+  .company-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .action-buttons {
+    margin-top: 10px;
+  }
+}
+
+.highlight-current-month {
+  border: 1px solid #89fca4;
+}
+

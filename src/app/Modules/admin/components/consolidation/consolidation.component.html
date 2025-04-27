@@ -1,11 +1,27 @@
 <div class="container" [ngClass]="{'dark-mode': isDarkMode}">
-    <div *ngFor="let company of companies" class="company-card"
-    (click)="viewDetails(company)"
-    [ngClass]="{'highlighted': isInCurrentMonth(company.descriptionDate)}">
-      <h3>{{ company.name }}</h3>
-      <p>{{ company.descriptionDate | date: 'dd MMMM yyyy' }}</p>
-      <p><strong>Record Date:</strong> {{ company.recordDate | date: 'dd MMMM yyyy' }}</p>
-      <p><strong>Effective Date:</strong> {{ company.effectiveDate | date: 'dd MMMM yyyy' }}</p>
+  <!-- Add New Dividend Button -->
+  <div class="header-actions mb-4 text-end">
+    <button class="btn btn-primary" (click)="addNewConsolidation()">
+      Add New Consolidation
+    </button>
+  </div>
+
+  <div *ngFor="let consolidation of companies" class="company-card">
+    <div class="company-content" (click)="viewDetails(consolidation)">
+      <div class="company-header">
+        <h3>{{ consolidation.companyName }}</h3>
+        <div class="action-buttons">
+          <button class="edit-btn" (click)="editConsolidation(consolidation, $event)">Edit</button>
+          <button class="delete-btn" (click)="deleteConsolidation(consolidation, $event)">Delete</button>
+        </div>
+      </div>
+
+      <div class="company-details">
+        <span><strong>Record Date:</strong> {{ consolidation.recordDate | date: 'dd MMMM yyyy' }}</span>
+        <span><strong>Effective Date:</strong> {{ consolidation.effectiveDate | date: 'dd MMMM yyyy' }}</span>
+      </div>
     </div>
   </div>
-  
+</div>
+
+

@@ -1,14 +1,11 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 import { ThemeService } from 'src/app/services/theme.service';
-
-interface Company {
-  id: string;
-  name: string;
-  descriptionDate: Date;
-  recordDate: Date;
-  effectiveDate: Date;
-}
+import { AddConsolidationComponent } from './add-consolidation/add-consolidation.component';
+import { Consolidation } from 'src/app/Model';
 
 
 @Component({
@@ -16,27 +13,21 @@ interface Company {
   templateUrl: './consolidation.component.html',
   styleUrls: ['./consolidation.component.scss']
 })
-export class ConsolidationComponent {
-  companies: Company[] = [
-    { id: '1', name: 'Company A', descriptionDate: new Date('2024-04-10') , recordDate: new Date('2024-05-10'), effectiveDate: new Date('2024-05-30') },
-    { id: '2', name: 'Company B', descriptionDate: new Date('2024-05-15') , recordDate: new Date('2024-05-15'), effectiveDate: new Date('2024-06-05') },
-    { id: '3', name: 'Company C', descriptionDate: new Date('2024-06-01') , recordDate: new Date('2024-06-01'), effectiveDate: new Date('2024-06-20') },
-    { id: '4', name: 'Company D', descriptionDate: new Date('2024-07-10') , recordDate: new Date('2024-06-10'), effectiveDate: new Date('2024-06-30') },
-    { id: '5', name: 'Company E', descriptionDate: new Date('2024-08-25') , recordDate: new Date('2024-04-25'), effectiveDate: new Date('2024-05-15') }
-  ];
-
-  filteredCompanies: Company[] = [];
-  isInCurrentMonth(date: Date): boolean {
-    const today = new Date();
-    return date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
-  }
+export class ConsolidationComponent implements OnInit {
+  companies: Consolidation[] = [];
   
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private themeService: ThemeService,
+    private apiService: ApiService,
+    private dialog: MatDialog
+  ) {}
 
 
-  constructor(private router: Router, private themeService: ThemeService) {
-    this.filterCompanies();
+  ngOnInit(): void {
+    this.getCompanies();
   }
-
   toggleDarkMode() {
     this.themeService.toggleDarkMode();
   }
@@ -45,13 +36,62 @@ export class ConsolidationComponent {
     return this.themeService.isDarkModeEnabled();
   }
 
-  viewDetails(company: Company) {
-    this.router.navigate(['/admin/consolidation', company.id]);
+  viewDetails(consolidation: Consolidation) {
+    this.router.navigate(['/admin/consolidation', consolidation._id]);
   }
 
-  private filterCompanies() {
-    const today = new Date();
-    this.filteredCompanies = this.companies.filter(company => company.recordDate <= today);
+    
+  addNewConsolidation() {
+  const dialogRef = this.dialog.open(AddConsolidationComponent, {
+      width: '800px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'refresh') {
+        this.getCompanies();
+      }
+    });
   }
+
+    getCompanies() {
+      this.apiService.get<Consolidation[]>('consolidations').subscribe({
+        next: (res) => {
+          this.companies = res;
+        },
+        error: (err) => {
+          console.error('Failed to fetch companies:', err);
+        }
+      });
+    }
+
+
+  editConsolidation(consolidation: Consolidation, event: Event) {
+   event.stopPropagation();
+    const dialogRef = this.dialog.open(AddConsolidationComponent, {
+      width: '800px',
+      data: { consolidation }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'refresh') {
+        this.getCompanies();
+      }
+    });
+  }
+
+  deleteConsolidation(consolidation: Consolidation, event: Event) {
+    event.stopPropagation();
+    if (confirm(`Are you sure you want to delete "${consolidation.companyName}"?`)) {
+      this.apiService.delete(`consolidations/${consolidation._id}`).subscribe({
+        next: () => {
+          this.getCompanies(); 
+        },
+        error: (err) => {
+          console.error('Error deleting dividend:', err);
+        }
+      });
+    }
+  }
+  
 
 }

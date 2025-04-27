@@ -1,0 +1,28 @@
+<div class="container" [ngClass]="{'dark-mode': isDarkMode}">
+  <!-- Add New Dividend Button -->
+  <div class="header-actions mb-4 text-end">
+    <button class="btn btn-primary" (click)="addNewDividend()">
+      Add New Dividend
+    </button>
+  </div>
+
+  <div *ngFor="let divident of companies; let i = index" 
+  class="company-card" 
+  [ngClass]="{'highlight-current-month': isCurrentMonth(divident)}">
+    <div class="company-content" (click)="viewDetails(divident, i)">
+      <div class="company-header">
+        <h3>{{ divident.companyName }}</h3>
+        <div class="action-buttons">
+          <button class="edit-btn" (click)="editDividend(divident, $event); $event.stopPropagation()">Edit</button>
+          <button class="delete-btn" (click)="deleteDividend(divident, $event); $event.stopPropagation()">Delete</button>
+        </div>
+      </div>
+
+      <div class="company-details">
+        <span><strong>Ex-dividend:</strong> {{ divident.exDate | date: 'dd MMMM yyyy' }}</span>
+        <span><strong>Payment Date:</strong> {{ divident.paymentDate | date: 'dd MMMM yyyy' }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
