@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'https://new-hl-backend.onrender.com/'; 
+  private baseUrl = 'https://new-hl-backend.onrender.com'; 
   currentTabIndex: number = 0;
   allCardItems: any[] = [];
 
