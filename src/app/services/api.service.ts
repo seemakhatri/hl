@@ -25,14 +25,14 @@ export class ApiService {
       headers: this.getAuthHeaders(),
       params: new HttpParams({ fromObject: params || {} })
     };
-    return this.http.get<T>(`${this.baseUrl}/${endpoint}`, options);
+    return this.http.get<T>(`${this.baseUrl}/api/${endpoint}`, options);
   }
 
   getById<T>(endpoint: string, id: string): Observable<T> {
     const options = {
       headers: this.getAuthHeaders()
     };
-    return this.http.get<T>(`${this.baseUrl}/${endpoint}/${id}`, options);
+    return this.http.get<T>(`${this.baseUrl}/api/${endpoint}/${id}`, options);
   }
   
 
@@ -43,7 +43,7 @@ export class ApiService {
   }
 
   put<T>(endpoint: string, body: any): Observable<T> {
-    return this.http.put<T>(`${this.baseUrl}/${endpoint}`, body, {
+    return this.http.put<T>(`${this.baseUrl}/api/${endpoint}`, body, {
       headers: this.getAuthHeaders()
     });
   }
@@ -53,6 +53,6 @@ export class ApiService {
       headers: this.getAuthHeaders(),
       params: new HttpParams({ fromObject: params || {} })
     };
-    return this.http.delete<T>(`${this.baseUrl}/${endpoint}`, options);
+    return this.http.delete<T>(`${this.baseUrl}/api/${endpoint}`, options);
   }
 }
