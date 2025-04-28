@@ -55,7 +55,7 @@
           <div class="card-title" style="text-align: center;">IPO</div>
         </div>
       </div>
-      <div class="arrow-card mt-4" (click)="navigateTo('ipo-section')">
+      <div *ngIf="isAdmin"  class="arrow-card mt-4" (click)="navigateTo('view-feedbacks')">
         <div class="card-body">
           <div class="card-title" style="text-align: center;">View Feedbacks</div>
         </div>
@@ -76,7 +76,6 @@
       </div>
       <div class="button-row">
         <button type="submit" class="submit-button">Submit Feedback</button>
-        <button type="button" class="additional-button" (click)="navigateTo('view-feedbacks')">View Feedbacks</button>
       </div>
     </form>
   </div>

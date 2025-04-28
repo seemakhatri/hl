@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ToasterService } from 'src/app/services/toaster.service';
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
   usMarketTomorrowMessage: string = '';
   ukMarketTomorrowMessage: string = '';
   feedbackForm!: FormGroup;
-
+  userRole: string | null = null;
   constructor(
     private router: Router,
     private themeService: ThemeService,
@@ -27,9 +28,11 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder,
     private toasterService: ToasterService,
     private feedbackService: FeedbackService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role');
     this.createForm(); 
     this.updateMarketStatus();
     setInterval(() => {
@@ -37,6 +40,12 @@ export class HomeComponent implements OnInit {
     }, 60000); // Update every minute
   }
   
+
+  get isAdmin(): boolean {
+    return this.authService.getRole() === 'admin';
+  }
+
+
   createForm() {
     this.feedbackForm = this.fb.group({
       userName: ['', Validators.required],
