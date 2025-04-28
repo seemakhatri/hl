@@ -34,6 +34,7 @@ export class LoginComponent {
       .subscribe({
         next: (res) => {
           localStorage.setItem('token', res.token);
+          localStorage.setItem('role', res.user.role);
           this.toast.success('Admin logged in successfully');
           this.router.navigate(['/home']);
         },

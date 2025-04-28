@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { AddDividentComponent } from '../add-divident/add-divident.component';
 import { ToasterService } from 'src/app/services/toaster.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dividend',
@@ -25,6 +26,7 @@ export class DividendComponent implements OnInit {
     private apiService: ApiService,
     private dialog: MatDialog,
         private toast: ToasterService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class DividendComponent implements OnInit {
   }
 
   get isAdmin(): boolean {
-    return this.userRole === 'admin';
+    return this.authService.getRole() === 'admin';
   }
 
   isCurrentMonth(divident: Dividend): boolean {

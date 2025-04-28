@@ -44,7 +44,8 @@ export class HeaderComponent {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.loggedIn = false;
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/home']);
   }
 }
