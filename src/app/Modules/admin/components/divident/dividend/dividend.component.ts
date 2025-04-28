@@ -15,6 +15,7 @@ import { ToasterService } from 'src/app/services/toaster.service';
 })
 export class DividendComponent implements OnInit {
   companies: Dividend[] = [];
+  userRole: string | null = null;
 
 
   constructor(
@@ -27,7 +28,12 @@ export class DividendComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role');
     this.getCompanies();
+  }
+
+  get isAdmin(): boolean {
+    return this.userRole === 'admin';
   }
 
   isCurrentMonth(divident: Dividend): boolean {

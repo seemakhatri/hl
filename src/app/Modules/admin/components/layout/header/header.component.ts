@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ThemeService } from 'src/app/services/theme.service';
@@ -11,16 +10,17 @@ import { ThemeService } from 'src/app/services/theme.service';
 })
 export class HeaderComponent {
   isMenuOpen = false;
-
+  loggedIn = false;
 
   constructor(private themeService: ThemeService, private router: Router) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         this.closeMenu();
+        this.checkLoginStatus();
       });
+    this.checkLoginStatus();
   }
-
 
   toggleDarkMode() {
     this.themeService.toggleDarkMode();
@@ -38,4 +38,13 @@ export class HeaderComponent {
     this.isMenuOpen = false;
   }
 
+  checkLoginStatus() {
+    this.loggedIn = !!localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.loggedIn = false;
+    this.router.navigate(['/auth/login']);
+  }
 }

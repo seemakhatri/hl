@@ -15,15 +15,17 @@
     </div>
 
     <div class="right">
-    <div class="login-btn-container">
-      <button class="btn btn-primary" routerLink="/auth/login" class="btn-login">Login</button>
-    </div>
+      <div class="login-btn-container">
+        <button *ngIf="!loggedIn" class="btn btn-primary" routerLink="/auth/login">Login</button>
+        <button *ngIf="loggedIn" class="btn btn-danger" (click)="logout()">Logout</button>
+      </div>
       <button (click)="toggleDarkMode()" class="dark-mode-toggle">
         <span *ngIf="isDarkMode">🌙</span>
         <span *ngIf="!isDarkMode">☀️</span>
       </button>
       <button (click)="toggleMenu()" class="menu-toggle">☰</button>
     </div>
+    
     
   </div>
 </div>

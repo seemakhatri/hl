@@ -36,11 +36,11 @@ export class ApiService {
   }
   
 
-  post<T>(endpoint: string, body: any): Observable<T> {
-    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, body, {
-      headers: this.getAuthHeaders()
-    });
+  post<T>(endpoint: string, body: any, authRequired = true): Observable<T> {
+    const headers = authRequired ? this.getAuthHeaders() : new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, body, { headers });
   }
+  
 
   put<T>(endpoint: string, body: any): Observable<T> {
     return this.http.put<T>(`${this.baseUrl}/api/${endpoint}`, body, {
