@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { AddConsolidationComponent } from './add-consolidation/add-consolidation.component';
 import { Consolidation } from 'src/app/Model';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -15,18 +16,25 @@ import { Consolidation } from 'src/app/Model';
 })
 export class ConsolidationComponent implements OnInit {
   companies: Consolidation[] = [];
+  userRole: string | null = null;
   
   constructor(
     private http: HttpClient,
     private router: Router,
     private themeService: ThemeService,
     private apiService: ApiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role');
     this.getCompanies();
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.getRole() === 'admin';
   }
   toggleDarkMode() {
     this.themeService.toggleDarkMode();

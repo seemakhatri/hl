@@ -6,6 +6,7 @@ import { Delisting } from 'src/app/Model';
 import { ApiService } from 'src/app/services/api.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { AddDelistingComponent } from '../add-delisting/add-delisting.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface Company {
   id: string;
@@ -22,6 +23,7 @@ interface Company {
 })
 export class DelistingComponent {
   companies: Delisting[] = [];
+  userRole: string | null = null;
 
 
   constructor(
@@ -29,12 +31,20 @@ export class DelistingComponent {
     private router: Router,
     private themeService: ThemeService,
     private apiService: ApiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role');
     this.getCompanies();
   }
+
+
+  get isAdmin(): boolean {
+    return this.authService.getRole() === 'admin';
+  }
+
 
   toggleDarkMode() {
     this.themeService.toggleDarkMode();

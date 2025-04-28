@@ -1,6 +1,6 @@
 <div class="container" [ngClass]="{'dark-mode': isDarkMode}">
   <!-- Add New Dividend Button -->
-  <div class="header-actions mb-4 text-end">
+  <div class="header-actions mb-4 text-end"  *ngIf="isAdmin">
     <button class="btn btn-primary" (click)="addNewConsolidation()">
       Add New Consolidation
     </button>
@@ -10,7 +10,7 @@
     <div class="company-content" (click)="viewDetails(consolidation)">
       <div class="company-header">
         <h3>{{ consolidation.companyName }}</h3>
-        <div class="action-buttons">
+        <div class="action-buttons"  *ngIf="isAdmin">
           <button class="edit-btn" (click)="editConsolidation(consolidation, $event)">Edit</button>
           <button class="delete-btn" (click)="deleteConsolidation(consolidation, $event)">Delete</button>
         </div>

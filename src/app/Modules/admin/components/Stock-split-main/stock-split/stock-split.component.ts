@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { AddStockSplitComponent } from '../add-stock-split/add-stock-split.component';
 import { ToasterService } from 'src/app/services/toaster.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-stock-split',
@@ -15,6 +16,7 @@ import { ToasterService } from 'src/app/services/toaster.service';
 })
 export class StockSplitComponent implements OnInit {
   companies: StockSplit[] = [];
+  userRole: string | null = null;
   isInCurrentMonth(date: Date): boolean {
     const today = new Date();
     return date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
@@ -29,12 +31,19 @@ export class StockSplitComponent implements OnInit {
     private apiService: ApiService,
     private dialog: MatDialog,
         private toast: ToasterService,
+    private authService: AuthService
   ) {}
 
     ngOnInit(): void {
+      this.userRole = localStorage.getItem('role');
       this.getCompanies();
     }
 
+    get isAdmin(): boolean {
+      return this.authService.getRole() === 'admin';
+    }
+
+    
     getCompanies() {
       this.apiService.get<StockSplit[]>('stock-splits').subscribe({
         next: (stockSplits) => {

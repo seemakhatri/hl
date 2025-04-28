@@ -1,6 +1,6 @@
 <div class="container" [ngClass]="{'dark-mode': isDarkMode}">
     <!-- Add New Dividend Button -->
-    <div class="header-actions mb-4 text-end">
+    <div class="header-actions mb-4 text-end" *ngIf="isAdmin">
       <button class="btn btn-primary" (click)="addNewStockSplit()">
         Add New Stock Split
       </button>
@@ -11,7 +11,7 @@
       <div class="company-content" (click)="viewDetails(stockSplit, i)">
         <div class="company-header">
           <h3>{{ stockSplit.companyName }}</h3>
-          <div class="action-buttons">
+          <div class="action-buttons" *ngIf="isAdmin">
             <button class="edit-btn" (click)="editDividend(stockSplit, $event)">Edit</button>
             <button class="delete-btn" (click)="deleteDividend(stockSplit, $event)">Delete</button>
           </div>
