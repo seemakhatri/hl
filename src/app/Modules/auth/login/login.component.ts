@@ -30,7 +30,7 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.invalid) return;
 
-    this.apiService.post<any>('api/auth/login', this.loginForm.value, false)
+    this.apiService.post<any>('/auth/login', this.loginForm.value, false)
       .subscribe({
         next: (res) => {
           localStorage.setItem('token', res.token);
