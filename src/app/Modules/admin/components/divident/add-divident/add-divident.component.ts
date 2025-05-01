@@ -35,13 +35,16 @@ export class AddDividentComponent implements OnInit {
       };
       this.dividendList = [loadedDividend];
       this.dividend = loadedDividend;
-      this.fixedCompanyName = loadedDividend.companyName;
-      this.isOverseas = loadedDividend.withholdingTax !== undefined;
+  
+      // 👉 Fix: Determine if 'Overseas' toggle should be ON
+      this.isOverseas = !!this.dividend.withholdingTax && this.dividend.withholdingTax > 0;
+  
       this.isEditMode = true;
     } else {
-      this.dividendList = [this.dividend];
+      this.isAddingNew = true;
     }
   }
+  
   
   formatDate(dateStr: string | Date): string {
     const date = new Date(dateStr);
@@ -56,7 +59,7 @@ export class AddDividentComponent implements OnInit {
     const currentDividend = this.dividendList[this.currentFormIndex];
   
     if (!this.isOverseas) {
-      delete currentDividend.withholdingTax;
+      this.dividend.withholdingTax = 0;
     }
   
     if (this.isEditMode && currentDividend._id && !this.isAddingNew) {
@@ -69,7 +72,6 @@ export class AddDividentComponent implements OnInit {
         (error) => this.handleError('updating', error)
       );
     } else {
-      // Case 2: Adding new dividend
       console.log('Adding new dividend:', currentDividend);
       this.apiService.post(endpoint, currentDividend).subscribe(
         () => {

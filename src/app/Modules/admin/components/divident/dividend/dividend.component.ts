@@ -37,13 +37,20 @@ export class DividendComponent implements OnInit {
   get isAdmin(): boolean {
     return this.authService.getRole() === 'admin';
   }
-
-  isCurrentMonth(divident: Dividend): boolean {
+  isHighlighted(dividend: Dividend): boolean {
     const today = new Date();
-    const exDate = new Date(divident.exDate);
-    return exDate.getMonth() === today.getMonth() && exDate.getFullYear() === today.getFullYear();
+    const exDate = new Date(dividend.exDate);
+    const paymentDate = new Date(dividend.paymentDate);
+  
+    const isCurrentMonth = (date: Date) =>
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
+  
+    return isCurrentMonth(exDate) || isCurrentMonth(paymentDate);
   }
-
+  
+  
+  
 
   getCompanies() {
     this.apiService.get<Dividend[]>('dividends').subscribe(

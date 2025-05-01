@@ -8,7 +8,8 @@
 
   <div *ngFor="let divident of companies; let i = index" 
   class="company-card" 
-  [ngClass]="{'highlight-current-month': isCurrentMonth(divident)}">
+  [ngClass]="{'highlight-today-or-month': isHighlighted(divident)}"
+>
     <div class="company-content" (click)="viewDetails(divident, i)">
       <div class="company-header">
         <h3>{{ divident.companyName }}</h3>

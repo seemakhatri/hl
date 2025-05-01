@@ -57,6 +57,7 @@ finalAmount: number = 0;
   fetchAndSetCompanies() {
     this.apiService.get<Dividend[]>('dividends').subscribe({
       next: (res) => {
+        console.log('Fetched companies:', res);
         this.companies = res;
         this.companies = res.sort((a, b) => new Date(a.exDate).getTime() - new Date(b.exDate).getTime());
   
