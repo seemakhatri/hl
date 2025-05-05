@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToasterService } from 'src/app/services/toaster.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
+import { StockFile } from 'src/app/Model';
 
 @Component({
   selector: 'app-stock-file',
@@ -9,63 +13,48 @@ import { ToasterService } from 'src/app/services/toaster.service';
   styleUrls: ['./stock-file.component.scss']
 })
 export class StockFileComponent implements OnInit {
-  stockForm!: FormGroup;
-  existingData: any[] = [];
-
+    stockFile: StockFile = new StockFile('', '', '');
+    isEditMode: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private toasterService: ToasterService,
+    private toast: ToasterService,
+    private authService: AuthService,
+    private router: Router,
+    private apiService: ApiService,
+
   ) { }
 
   ngOnInit(): void {
-    this.stockForm = this.fb.group({
-      stockName: ['', Validators.required],
-      isin: ['', Validators.required],
-      sedolOrTicker: ['', Validators.required]
-    });
 
-    // this.existingData = this.dataService.getExistingData();
   }
 
-  isDuplicateEntry(formData: any): boolean {
-    return this.existingData.some(data =>
-      data.ISIN === formData.isin ||
-      data.SEDOL === formData.sedolOrTicker ||
-      data.Ticker === formData.sedolOrTicker
-    );
+
+  get isAdmin(): boolean {
+    return this.authService.getRole() === 'admin';
   }
 
 
   onSubmit() {
-    if (this.stockForm.valid) {
-      const formData = {
-        type: 'stock',
-        stockName: this.stockForm.value.stockName,
-        isin: this.stockForm.value.isin,
-        sedolOrTicker: this.stockForm.value.sedolOrTicker
-      };
+    const endpoint = 'stock-files';
+    
+    this.apiService.post(endpoint, this.stockFile).subscribe(
+      () => {
+        this.toast.success('Stock file submitted successfully for approval.', 'Success');
 
-      if (this.isDuplicateEntry(formData)) {
-        this.toasterService.error(' Unfortunately, this share/equity is not eligible on HL Platform', 'Rejection');
-        return;
+        this.stockFile = new StockFile('', '', '');
+      },
+      error => {
+        this.toast.error('Failed to submit the Stock file. Please try again.', 'Error');
       }
+    );
+  }
+  
 
-      this.http.post('https://hl-backend-r8qx.onrender.com/api/inquiries', formData)
-        .subscribe(
-          (response) => {
-            this.toasterService.success('Inquiry sent successfully!', 'Success');
-            console.log('Inquiry sent successfully:', response);
-            this.stockForm.reset();
-          },
-          (error) => {
-            console.error('Error sending inquiry', error);
-          }
-        );
-    } else {
-      this.stockForm.markAllAsTouched();
-    }
+
+  viewPending() {
+    this.router.navigate(['/admin/pending-stock-file']);
   }
 
 }

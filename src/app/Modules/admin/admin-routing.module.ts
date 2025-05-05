@@ -21,6 +21,8 @@ import { AddDividentComponent } from './components/divident/add-divident/add-div
 import { AddStockSplitComponent } from './components/Stock-split-main/add-stock-split/add-stock-split.component';
 import { AddConsolidationComponent } from './components/consolidation/add-consolidation/add-consolidation.component';
 import { AddDelistingComponent } from './components/Delisting-main/add-delisting/add-delisting.component';
+import { PendingStockFileComponent } from './components/stock-file/pending-stock-file/pending-stock-file.component';
+import { PendingFundFileComponent } from './components/fund-file/pending-fund-file/pending-fund-file.component';
 
 const routes: Routes = [
   {
@@ -47,7 +49,9 @@ const routes: Routes = [
       { path: 'view-feedbacks', component: ViewFeedbacksComponent},
       { path: 'ipo-section', component: IpoSectionComponent},
       { path: 'ipo-section/:id', component: IpoDetailComponent},
-      { path: 'market-calender', component: MarketCalendarComponent}
+      { path: 'market-calender', component: MarketCalendarComponent},
+      { path: 'pending-stock-file', component: PendingStockFileComponent},
+      { path: 'pending-fund-file', component: PendingFundFileComponent},
 
     ]
   }

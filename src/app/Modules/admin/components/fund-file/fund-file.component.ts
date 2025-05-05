@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FundFile } from 'src/app/Model';
+import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ToasterService } from 'src/app/services/toaster.service';
 
 @Component({
@@ -9,61 +13,47 @@ import { ToasterService } from 'src/app/services/toaster.service';
   styleUrls: ['./fund-file.component.scss']
 })
 export class FundFileComponent implements OnInit {
-  fundForm!: FormGroup;
-  existingData: any[] = [];
+    fundFile: FundFile = new FundFile('', '', '');
+    isEditMode: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private toasterService: ToasterService
+    private toast: ToasterService,
+    private authService: AuthService,
+    private router: Router,
+    private apiService: ApiService,
+
   ) { }
 
   ngOnInit(): void {
-    this.fundForm = this.fb.group({
-      fundName: ['', Validators.required],
-      isin: ['', Validators.required],
-      sedolOrTicker: ['', Validators.required]
-    });
 
-    // this.existingData = this.dataService.getExistingData();
   }
 
-  isDuplicateEntry(formData: any): boolean {
-    return this.existingData.some(data =>
-      data.ISIN === formData.isin ||
-      data.SEDOL === formData.sedolOrTicker ||
-      data.Ticker === formData.sedolOrTicker
-    );
+
+  get isAdmin(): boolean {
+    return this.authService.getRole() === 'admin';
   }
+
 
   onSubmit() {
-    if (this.fundForm.valid) {
-      const formData = {
-        type: 'fund',
-        fundName: this.fundForm.value.fundName,
-        isin: this.fundForm.value.isin,
-        sedolOrTicker: this.fundForm.value.sedolOrTicker
-      };
-
-      if (this.isDuplicateEntry(formData)) {
-        this.toasterService.error(' Unfortunately, this fund is not eligible on HL Platform', 'Rejection');
-        return;
+    const endpoint = 'fund-files';
+    
+    this.apiService.post(endpoint, this.fundFile).subscribe(
+      () => {
+        this.toast.success('Fund file submitted successfully for approval.', 'Success');
+        this.fundFile = new FundFile('', '', '');
+      },
+      error => {
+        this.toast.error('Failed to submit the fund file. Please try again.', 'Error');
+        console.error('Error adding consolidation:', error);
       }
-     
+    );
+  }
+  
 
-      this.http.post('https://hl-backend-r8qx.onrender.com/api/inquiries', formData)
-        .subscribe(
-          (response) => {
-            this.toasterService.success('Inquiry sent successfully!', 'Success');
-            console.log('Inquiry sent successfully:', response);
-            this.fundForm.reset();
-          },
-          (error) => {
-            console.error('Error sending inquiry', error);
-          }
-        );
-    } else {
-      this.fundForm.markAllAsTouched();
-    }
+
+  viewPending() {
+    this.router.navigate(['/admin/pending-fund-file']);
   }
 }

@@ -32,6 +32,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AddCategoryComponent } from './components/layout/add-category/add-category.component';
+import { PendingStockFileComponent } from './components/stock-file/pending-stock-file/pending-stock-file.component';
+import { RejectionReasonDialogComponent } from './components/stock-file/rejection-reason-dialog/rejection-reason-dialog.component';
+import { PendingFundFileComponent } from './components/fund-file/pending-fund-file/pending-fund-file.component';
+import { FundRejectionDialogComponent } from './components/fund-file/fund-rejection-dialog/fund-rejection-dialog.component';
 
 
 
@@ -60,7 +65,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     AddDividentComponent,
     AddStockSplitComponent,
     AddConsolidationComponent,
-    AddDelistingComponent
+    AddDelistingComponent,
+    AddCategoryComponent,
+    PendingStockFileComponent,
+    RejectionReasonDialogComponent,
+    PendingFundFileComponent,
+    FundRejectionDialogComponent
   ],
   imports: [
     CommonModule,

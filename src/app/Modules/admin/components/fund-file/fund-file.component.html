@@ -1,34 +1,33 @@
 <div class="container">
-    <form [formGroup]="fundForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="fundName">Fund Name</label>
-          <input type="text" class="form-control" id="fundName" formControlName="fundName">
-          <div *ngIf="fundForm.get('fundName')?.invalid && fundForm.get('fundName')?.touched" class="invalid-feedback">
-            Fund Name is required.
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="isin">ISIN</label>
-          <input type="text" class="form-control" id="isin" formControlName="isin">
-          <div *ngIf="fundForm.get('isin')?.invalid && fundForm.get('isin')?.touched" class="invalid-feedback">
-            ISIN is required.
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="sedolOrTicker">SEDOL or Ticker</label>
-          <input type="text" class="form-control" id="sedolOrTicker" formControlName="sedolOrTicker">
-          <div *ngIf="fundForm.get('sedolOrTicker')?.invalid && fundForm.get('sedolOrTicker')?.touched" class="invalid-feedback">
-            SEDOL or Ticker is required.
-          </div>
-        </div>
-
-        <div class="message">
-            <p>If eligible for the platform, funds will take around 3-4 weeks to be added to the platform.</p>
-        </div>
-        
-        <button type="submit" class="btn btn-primary">SUBMIT</button>
-      </form>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="fundName">Stock Name</label>
+      <input type="text" class="form-control" id="fundName" name="fundName" [(ngModel)]="fundFile.fundName">
+    </div>
+  
       
+    <div class="form-group">
+      <label for="isin">ISIN</label>
+      <input type="text" class="form-control" id="isin" name="isin" [(ngModel)]="fundFile.isin">
+    </div>
+      
+    <div class="form-group">
+      <label for="sedolOrTicker">SEDOL or Ticker</label>
+      <input type="text" class="form-control" id="sedolOrTicker" name="sedolOrTicker" [(ngModel)]="fundFile.sedolOrTicker">
+    </div>
+  
+
+      <div class="message">
+          <p>If eligible for the platform, shares will typically take 4 working days to be added. ETFs and Investment Trusts can take up to 2 weeks to be added as we require regulatory data to be provided to Funds Library.</p>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">SUBMIT</button>
+    </form>
+    
+</div>
+
+<div class="floating-action" *ngIf="isAdmin">
+<button class="btn btn-primary" (click)="viewPending()">
+  View Pending Requests
+</button>
 </div>

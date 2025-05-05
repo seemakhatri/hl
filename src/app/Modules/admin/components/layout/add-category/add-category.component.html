@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="border-0 rounded-4 p-4">
+      <h3 class="mb-4 fw-bold text-center">{{ isEditMode ? 'Edit Category' : 'Add Category' }}</h3>
+      <form (ngSubmit)="onSubmit()" class="row g-4">
+        <div class="col-md-6">
+            <label for="label" class="form-label">Category Name</label>
+            <input type="label" id="label" class="form-control shadow-none border" [(ngModel)]="menuItem.label" name="label" required>
+          </div>
+    
+          <div class="col-md-6">
+            <label for="route" class="form-label">Route </label>
+            <input type="route" id="route" class="form-control shadow-none border" [(ngModel)]="menuItem.route" name="route" required>
+          </div>
+  
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary px-5 py-2 shadow-sm rounded-pill">
+            {{ isEditMode ? 'Update Category' : 'Add Category' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

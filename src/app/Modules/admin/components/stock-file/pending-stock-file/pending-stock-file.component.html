@@ -1,0 +1,27 @@
+<div class="pending-list-page">
+    <div class="column">
+      <h2>Rejected Companies</h2>
+      <div *ngFor="let item of rejectedList" class="card rejected-card">
+        <h4>{{ item.stockName }}</h4>
+        <p>{{ item.rejectionReason }}</p>
+      </div>
+    </div>
+  
+    <div class="column">
+        <h2>Pending Approvals</h2>
+        <div *ngFor="let item of pendingList" class="card pending-card">
+          <div class="card-content">
+            <div class="info">
+                <h4>{{ item.stockName }}</h4>
+                <p>{{ item.isin || item.sedolOrTicker }}</p>
+            </div>
+            <div class="action-buttons">
+              <button class="btn btn-success" (click)="approve(item)">✔️</button>
+              <button class="btn btn-danger" (click)="openRejectDialog(item)">❌</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+  

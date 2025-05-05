@@ -73,3 +73,62 @@ export interface Company {
     }
   }
   
+  export class MenuItem {
+    label: string;
+    route: string;
+    _id?: string;
+  
+    constructor(label: string, route: string, _id?: string) {
+      this.label = label;
+      this.route = route;
+      this._id = _id;
+    }
+  }
+
+  export class StockFile {
+    stockName: string;
+    isin: string;
+    sedolOrTicker: string;
+    status?: 'pending' | 'approved' | 'rejected';
+    rejectionReason?: string;
+    _id?: string;
+  
+    constructor(
+      stockName: string,
+      isin: string,
+      sedolOrTicker: string,
+      status?: 'pending' | 'approved' | 'rejected',
+      rejectionReason?: string
+    ) {
+      this.stockName = stockName;
+      this.isin = isin;
+      this.sedolOrTicker = sedolOrTicker;
+      this.status = status;
+      this.rejectionReason = rejectionReason;
+    }
+  }
+  
+
+  export class FundFile {
+    fundName: string;
+    isin: string;
+    sedolOrTicker: string;
+    status?: 'pending' | 'approved' | 'rejected';
+    rejectionReason?: string;
+    _id?: string;
+  
+    constructor(
+      fundName: string,
+      isin: string,
+      sedolOrTicker: string,
+      status?: 'pending' | 'approved' | 'rejected',
+      rejectionReason?: string
+    ) {
+      this.fundName = fundName;
+      this.isin = isin;
+      this.sedolOrTicker = sedolOrTicker;
+      this.status = status;
+      this.rejectionReason = rejectionReason;
+    }
+  }
+  

@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="border-0 rounded-4 p-4">
+      <h3 class="mb-4 fw-bold text-center">Add Reason For Rejection</h3>
+      <form (ngSubmit)="onSubmit()" class="row g-4">
+        <div class="col-12">
+          <textarea
+            rows="4"
+            class="form-control shadow-none border"
+            placeholder="Add Reason for Rejection"
+            name="notes"
+            [(ngModel)]="reason"
+            required>
+          </textarea>
+        </div>
+      
+        <div class="col-12 text-center">
+          <button
+            type="submit"
+            class="btn btn-primary px-5 py-2 shadow-sm rounded-pill"
+            [disabled]="!reason.trim()">
+            Add Rejection
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
