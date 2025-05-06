@@ -56,6 +56,7 @@ export class AddDividentComponent implements OnInit {
 
   onSubmit() {
     const endpoint = 'dividends';
+    this.dividendList[this.currentFormIndex] = { ...this.dividend };
     const currentDividend = this.dividendList[this.currentFormIndex];
   
     if (!this.isOverseas) {
